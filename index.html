@@ -1,0 +1,3502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DSA QUEST // Cybernetic C++ &amp; Algorithms Academy</title>
+  <!-- Tailwind CSS v3.4.17 via CDN for responsive layout utilities -->
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <!-- Google Fonts: Inter for UI & JetBrains Mono for C++ code -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Custom Futuristic Theme Stylesheet -->
+  <style>
+.hidden {
+  display: none !important;
+}
+
+/* ==========================================================================
+   DSA QUEST // Cybernetic C++ & Algorithms Academy
+   File: styles.css
+   Beginner Note: This stylesheet defines our dark futuristic color variables,
+   glowing cyber borders, smooth animations, and responsive grid helpers.
+   ========================================================================== */
+
+:root {
+  --bg-abyss: #060a17;
+  --bg-navy: #0b1124;
+  --bg-card: rgba(15, 23, 42, 0.78);
+  --bg-card-hover: rgba(22, 33, 62, 0.92);
+  --cyan-glow: #00f0ff;
+  --cyan-dim: rgba(0, 240, 255, 0.16);
+  --violet-glow: #8b5cf6;
+  --violet-dim: rgba(139, 92, 246, 0.18);
+  --emerald-glow: #10b981;
+  --amber-glow: #f59e0b;
+  --rose-glow: #f43f5e;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --border-subtle: rgba(148, 163, 184, 0.16);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-abyss);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--bg-abyss);
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(0, 240, 255, 0.08) 0%, transparent 36%),
+    radial-gradient(circle at 88% 12%, rgba(139, 92, 246, 0.10) 0%, transparent 40%),
+    radial-gradient(circle at 50% 85%, rgba(0, 240, 255, 0.05) 0%, transparent 45%),
+    linear-gradient(rgba(15, 23, 42, 0.35) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.35) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+  overflow-x: hidden;
+}
+
+.font-mono-code {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Futuristic Glass Cards & Neon Accents */
+.cyber-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.cyber-card:hover {
+  border-color: rgba(0, 240, 255, 0.35);
+}
+
+.cyber-card-interactive:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 240, 255, 0.55);
+  box-shadow: 0 12px 32px -8px rgba(0, 240, 255, 0.16), 0 0 0 1px rgba(0, 240, 255, 0.2);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.28);
+}
+
+.glow-violet {
+  box-shadow: 0 0 22px rgba(139, 92, 246, 0.32);
+}
+
+.glow-emerald {
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.32);
+}
+
+.text-glow-cyan {
+  text-shadow: 0 0 14px rgba(0, 240, 255, 0.45);
+}
+
+/* Navigation Tab Active States */
+.nav-tab-btn {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.nav-tab-btn.active {
+  color: #00f0ff;
+  background: rgba(0, 240, 255, 0.11);
+  border-color: rgba(0, 240, 255, 0.45);
+  box-shadow: inset 0 0 12px rgba(0, 240, 255, 0.12);
+}
+
+/* Quest Node Styling */
+.quest-node-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.quest-node-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #00f0ff, #8b5cf6);
+  opacity: 0.75;
+}
+
+.quest-node-card.completed::before {
+  background: linear-gradient(180deg, #10b981, #00f0ff);
+  opacity: 1;
+}
+
+.quest-node-card.locked {
+  opacity: 0.68;
+}
+
+.quest-node-card.locked::before {
+  background: #475569;
+}
+
+/* Algorithm Visualizer Array Cells */
+.array-cell {
+  transition: all 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.array-cell.state-active {
+  border-color: rgba(0, 240, 255, 0.55);
+  background: rgba(15, 23, 42, 0.92);
+}
+
+.array-cell.state-mid {
+  transform: translateY(-8px) scale(1.05);
+  border-color: #f59e0b;
+  background: linear-gradient(180deg, rgba(245, 158, 11, 0.25), rgba(15, 23, 42, 0.95));
+  box-shadow: 0 0 24px rgba(245, 158, 11, 0.42);
+  z-index: 10;
+}
+
+.array-cell.state-found {
+  transform: translateY(-10px) scale(1.08);
+  border-color: #10b981;
+  background: linear-gradient(180deg, rgba(16, 185, 129, 0.32), rgba(6, 78, 59, 0.85));
+  box-shadow: 0 0 28px rgba(16, 185, 129, 0.55);
+  z-index: 12;
+}
+
+.array-cell.state-eliminated {
+  opacity: 0.28;
+  transform: scale(0.93);
+  border-color: rgba(100, 116, 139, 0.25);
+  background: rgba(15, 23, 42, 0.35);
+  filter: grayscale(70%);
+}
+
+.array-cell.state-compare {
+  transform: translateY(-6px);
+  border-color: #00f0ff;
+  background: linear-gradient(180deg, rgba(0, 240, 255, 0.22), rgba(15, 23, 42, 0.95));
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.35);
+}
+
+.array-cell.state-swap {
+  transform: translateY(-8px) scale(1.05);
+  border-color: #a855f7;
+  background: linear-gradient(180deg, rgba(168, 85, 247, 0.3), rgba(15, 23, 42, 0.95));
+  box-shadow: 0 0 22px rgba(168, 85, 247, 0.45);
+}
+
+/* Synchronized C++ Code Line Highlighting */
+.cpp-code-line {
+  display: flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-left: 3px solid transparent;
+  transition: background-color 0.18s ease, border-color 0.18s ease;
+  border-radius: 0 6px 6px 0;
+}
+
+.cpp-code-line.active-line {
+  background: rgba(0, 240, 255, 0.16);
+  border-left-color: #00f0ff;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Custom Range Slider */
+input[type="range"].cyber-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  background: rgba(51, 65, 85, 0.8);
+  border-radius: 999px;
+  outline: none;
+}
+
+input[type="range"].cyber-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #00f0ff;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.8);
+  border: 2px solid #060a17;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #060a17;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+@keyframes pulseRing {
+  0% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0.45); }
+  70% { box-shadow: 0 0 0 10px rgba(0, 240, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0); }
+}
+
+.pulse-cyan {
+  animation: pulseRing 2.4s infinite;
+}
+
+</style>
+</head>
+<body class="text-slate-100 antialiased selection:bg-cyan-400 selection:text-slate-950">
+
+  <!-- Floating Toast Notification Stack -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2.5 pointer-events-none"></div>
+
+  <!-- Top Cyber Academy Header & Live Adventurer HUD -->
+  <header class="sticky top-0 z-40 border-b border-slate-800/90 bg-slate-950/85 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+      <!-- Brand Logo & Name -->
+      <button type="button" onclick="window.DSAQuestApp.switchTab('home')" class="flex items-center gap-3 text-left group focus:outline-none">
+        <div class="w-10 h-10 rounded-xl bg-slate-900 border border-cyan-400/50 flex items-center justify-center glow-cyan group-hover:scale-105 transition">
+          <!-- Custom SVG Cyber Crystal Logo -->
+          <svg class="w-6 h-6 text-cyan-400" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <polygon points="16,2 28,9 28,23 16,30 4,23 4,9" stroke="currentColor" stroke-width="2" fill="rgba(0,240,255,0.12)" />
+            <polygon points="16,7 23,11 23,21 16,25 9,21 9,11" stroke="#8b5cf6" stroke-width="1.5" fill="rgba(139,92,246,0.18)" />
+            <circle cx="16" cy="16" r="3" fill="#00f0ff" />
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold tracking-tight text-lg text-white">DSA <span class="text-cyan-400">QUEST</span></span>
+            <span class="hidden sm:inline-block px-2 py-0.5 rounded text-[10px] font-mono-code font-bold bg-violet-500/20 text-violet-300 border border-violet-500/30">C++ ACADEMY v1.0</span>
+          </div>
+          <p class="text-[11px] text-slate-400 hidden sm:block">Interactive Data Structures &amp; Algorithms Odyssey</p>
+        </div>
+      </button>
+
+      <!-- Live Adventurer XP Bar & Streak HUD -->
+      <div class="flex items-center gap-2.5 sm:gap-4">
+        <div class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900/90 border border-slate-800">
+          <span class="text-xs font-mono-code text-amber-300 font-bold" id="hud-streak">3d Streak</span>
+        </div>
+
+        <div class="flex items-center gap-3 px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-slate-800">
+          <span id="hud-rank-badge" class="px-2 py-0.5 rounded bg-cyan-400 text-slate-950 font-mono-code font-extrabold text-xs">LVL 1</span>
+          <div class="w-28 sm:w-36">
+            <div class="flex items-center justify-between text-[11px] font-mono-code">
+              <span id="hud-rank-title" class="text-slate-200 font-semibold truncate">Novice Cadet</span>
+              <span id="hud-xp-text" class="text-cyan-300">120 / 150 XP</span>
+            </div>
+            <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden mt-1">
+              <div id="hud-xp-bar" class="h-full bg-gradient-to-r from-cyan-400 to-violet-500 transition-all duration-300" style="width: 80%"></div>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" id="hud-sound-btn" onclick="window.DSAQuestApp.toggleSound()"
+          class="px-2.5 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-xs font-mono-code text-slate-300 transition">
+          🔊 Audio
+        </button>
+      </div>
+    </div>
+
+    <!-- Primary Navigation Bar (Responsive Single-Line Scrollable on Mobile) -->
+    <nav aria-label="Main Navigation" class="border-t border-slate-900 bg-slate-950/60">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-2 flex items-center gap-1.5 overflow-x-auto">
+        <button type="button" id="nav-btn-home" onclick="window.DSAQuestApp.switchTab('home')"
+          class="nav-tab-btn active px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold border border-transparent text-slate-300 hover:text-white shrink-0">
+          🏛️ Command Center
+        </button>
+        <button type="button" id="nav-btn-quests" onclick="window.DSAQuestApp.switchTab('quests')"
+          class="nav-tab-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold border border-transparent text-slate-300 hover:text-white shrink-0">
+          🗺️ Quest Map (8)
+        </button>
+        <button type="button" id="nav-btn-playground" onclick="window.DSAQuestApp.switchTab('playground')"
+          class="nav-tab-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold border border-transparent text-slate-300 hover:text-white shrink-0">
+          🔭 Visualizer Lab
+        </button>
+        <button type="button" id="nav-btn-daily" onclick="window.DSAQuestApp.switchTab('daily')"
+          class="nav-tab-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold border border-transparent text-slate-300 hover:text-white shrink-0">
+          ⚔️ Daily Quests &amp; Boss
+        </button>
+        <button type="button" id="nav-btn-leaderboard" onclick="window.DSAQuestApp.switchTab('leaderboard')"
+          class="nav-tab-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold border border-transparent text-slate-300 hover:text-white shrink-0">
+          🏆 Leaderboard
+        </button>
+        <button type="button" id="nav-btn-dashboard" onclick="window.DSAQuestApp.switchTab('dashboard')"
+          class="nav-tab-btn px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold border border-transparent text-slate-300 hover:text-white shrink-0">
+          📊 Profile &amp; Share
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Workspace Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+
+    <!-- ====================================================================
+         VIEW 1: HOME // COMMAND CENTER
+         ==================================================================== -->
+    <section id="view-home" class="space-y-8">
+      <!-- Hero Banner -->
+      <div class="cyber-card p-6 sm:p-8 lg:p-10 relative overflow-hidden border-cyan-500/30">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7 space-y-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/15 border border-cyan-400/40 text-cyan-300 text-xs font-mono-code font-semibold">
+              <span>⚡ INTERACTIVE C++ &amp; DSA DIGITAL ACADEMY</span>
+            </div>
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+              Master Algorithms by <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-violet-400">Seeing Every Step</span> in Action.
+            </h1>
+            <p class="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl">
+              Welcome to <strong class="text-white">DSA QUEST</strong>. Instead of memorizing dry formulas, step inside a futuristic training ground where you watch Binary Search slice arrays in half, trace C++ pointers, conquer daily coding bosses, and level up your adventurer rank.
+            </p>
+            <div class="flex flex-wrap gap-3 pt-2">
+              <button type="button" onclick="window.DSAQuestApp.switchTab('quests')"
+                class="px-5 py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-extrabold text-sm glow-cyan transition">
+                🗺️ Launch Quest Map
+              </button>
+              <button type="button" onclick="window.DSAQuestApp.switchTab('playground')"
+                class="px-5 py-2.5 rounded-xl bg-violet-500/25 hover:bg-violet-500/35 text-violet-200 border border-violet-400/50 font-bold text-sm transition">
+                🔭 Open Binary Search Visualizer
+              </button>
+              <button type="button" onclick="window.DSAQuestApp.switchTab('daily')"
+                class="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 font-semibold text-sm transition">
+                ⚔️ Challenge of the Day
+              </button>
+            </div>
+          </div>
+
+          <!-- Interactive Cybernetic Radar / Visual Card -->
+          <div class="lg:col-span-5">
+            <div class="p-5 rounded-2xl bg-slate-950/90 border border-slate-800 space-y-4">
+              <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <span class="text-xs font-mono-code text-cyan-400 font-bold">// ADVENTURER TELEMETRY</span>
+                <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[11px] font-mono-code">LOCAL SAVE ACTIVE</span>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800/90">
+                  <div class="text-[11px] text-slate-400 uppercase">Current Rank</div>
+                  <div id="home-stat-rank" class="text-sm sm:text-base font-bold text-cyan-300 mt-0.5">Lv.1 Novice Cadet</div>
+                </div>
+                <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800/90">
+                  <div class="text-[11px] text-slate-400 uppercase">Total Experience</div>
+                  <div id="home-stat-xp" class="text-sm sm:text-base font-bold font-mono-code text-white mt-0.5">120 XP</div>
+                </div>
+                <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800/90">
+                  <div class="text-[11px] text-slate-400 uppercase">Quest Progression</div>
+                  <div id="home-stat-quests" class="text-sm sm:text-base font-bold font-mono-code text-violet-300 mt-0.5">0 / 8 Sectors</div>
+                </div>
+                <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800/90">
+                  <div class="text-[11px] text-slate-400 uppercase">Badges Unlocked</div>
+                  <div id="home-stat-badges" class="text-sm sm:text-base font-bold font-mono-code text-amber-300 mt-0.5">0 / 8 Unlocked</div>
+                </div>
+              </div>
+              <div class="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-xs text-cyan-200 flex items-center justify-between gap-2">
+                <span>Want to preview advanced C++ sectors right away?</span>
+                <button type="button" onclick="window.DSAQuestApp.switchTab('quests'); window.DSAQuestApp.toggleMentorUnlock();"
+                  class="px-2.5 py-1 rounded bg-cyan-400 text-slate-950 font-bold shrink-0 hover:bg-cyan-300 transition">
+                  Unlock All
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Core Pillar Feature Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div onclick="window.DSAQuestApp.switchTab('quests')" class="cyber-card cyber-card-interactive p-5 cursor-pointer flex flex-col justify-between">
+          <div>
+            <div class="text-xs font-mono-code text-cyan-400 font-bold mb-1">01 // PROGRESSION PATH</div>
+            <h2 class="text-base font-bold text-white mb-1.5">8-Sector C++ Quest Map</h2>
+            <p class="text-xs text-slate-300 leading-relaxed">Journey from stack variables and pass-by-reference (`&amp;`) to Binary Search, Sorting, Pointers, and Binary Search Trees.</p>
+          </div>
+          <span class="text-xs font-bold text-cyan-300 mt-4 inline-block">Explore Sectors →</span>
+        </div>
+
+        <div onclick="window.DSAQuestApp.switchTab('playground')" class="cyber-card cyber-card-interactive p-5 cursor-pointer flex flex-col justify-between">
+          <div>
+            <div class="text-xs font-mono-code text-violet-400 font-bold mb-1">02 // VISUAL PLAYGROUND</div>
+            <h2 class="text-base font-bold text-white mb-1.5">Step-by-Step Algorithm Lab</h2>
+            <p class="text-xs text-slate-300 leading-relaxed">Enter your own array and watch Binary Search, Selection Sort, and Two-Pointers highlight live C++ lines as they execute.</p>
+          </div>
+          <span class="text-xs font-bold text-violet-300 mt-4 inline-block">Launch Visualizer →</span>
+        </div>
+
+        <div onclick="window.DSAQuestApp.switchTab('daily')" class="cyber-card cyber-card-interactive p-5 cursor-pointer flex flex-col justify-between">
+          <div>
+            <div class="text-xs font-mono-code text-amber-400 font-bold mb-1">03 // DAILY TRAINING</div>
+            <h2 class="text-base font-bold text-white mb-1.5">Boss Fight &amp; Micro-Quests</h2>
+            <p class="text-xs text-slate-300 leading-relaxed">Conquer "Search in a Rotated Sorted Array" with progressive hints and 8 bite-sized C++ syntax &amp; complexity drills.</p>
+          </div>
+          <span class="text-xs font-bold text-amber-300 mt-4 inline-block">Start Daily Quest →</span>
+        </div>
+
+        <div onclick="window.DSAQuestApp.switchTab('dashboard')" class="cyber-card cyber-card-interactive p-5 cursor-pointer flex flex-col justify-between">
+          <div>
+            <div class="text-xs font-mono-code text-emerald-400 font-bold mb-1">04 // SHAREABLE BADGES</div>
+            <h2 class="text-base font-bold text-white mb-1.5">Achievements &amp; Share Card</h2>
+            <p class="text-xs text-slate-300 leading-relaxed">Unlock 8 milestone badges, customize your callsign, and copy a formatted progress summary card for your community.</p>
+          </div>
+          <span class="text-xs font-bold text-emerald-300 mt-4 inline-block">View Profile →</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 2: QUEST MAP (8 SECTORS)
+         ==================================================================== -->
+    <section id="view-quests" class="hidden space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <span class="text-xs font-mono-code text-cyan-400 font-bold uppercase tracking-wider">// CURRICULUM PROGRESSION PATH</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-0.5">C++ &amp; DSA Quest Map</h2>
+          <p class="text-xs sm:text-sm text-slate-300 mt-1">Complete sectors to earn XP and unlock advanced algorithms—or toggle Mentor Mode to inspect any sector immediately.</p>
+        </div>
+        <button type="button" id="mentor-unlock-btn" onclick="window.DSAQuestApp.toggleMentorUnlock()"
+          class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-cyan-400/50 text-cyan-300 text-xs font-mono-code font-bold transition self-start sm:self-auto">
+          🔑 Mentor Mode: Unlock All 8 Sectors Immediately
+        </button>
+      </div>
+
+      <div id="quest-map-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 3: INTERACTIVE ALGORITHM VISUALIZER PLAYGROUND
+         ==================================================================== -->
+    <section id="view-playground" class="hidden space-y-6">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        <div>
+          <span class="text-xs font-mono-code text-cyan-400 font-bold uppercase tracking-wider">// TEACH THROUGH EXPLORATION</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-0.5">Interactive Algorithm Visualizer</h2>
+          <p class="text-xs sm:text-sm text-slate-300 mt-1">Enter your own numbers, step forward or backward through time, and watch how the algorithm updates pointers and C++ code lines.</p>
+        </div>
+
+        <!-- Algorithm Selector Pills -->
+        <div class="flex flex-wrap gap-2">
+          <button type="button" id="viz-algo-btn-binary" onclick="window.DSAVisualizer.switchAlgorithm('binary')"
+            class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-400/60 transition">
+            ⚡ Binary Search O(log n)
+          </button>
+          <button type="button" id="viz-algo-btn-selection" onclick="window.DSAVisualizer.switchAlgorithm('selection')"
+            class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-900/70 text-slate-400 border border-slate-800 hover:text-slate-200 transition">
+            🔄 Selection Sort O(n²)
+          </button>
+          <button type="button" id="viz-algo-btn-twopointer" onclick="window.DSAVisualizer.switchAlgorithm('twopointer')"
+            class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-900/70 text-slate-400 border border-slate-800 hover:text-slate-200 transition">
+            🎯 Two-Pointer Sum O(n)
+          </button>
+        </div>
+      </div>
+
+      <!-- Custom Input & Preset Controls Card -->
+      <div class="cyber-card p-5 space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
+          <div class="md:col-span-7">
+            <label for="viz-array-input" class="block text-xs font-mono-code text-slate-300 mb-1.5">
+              Array Elements (2 to 16 comma-separated integers):
+            </label>
+            <input id="viz-array-input" type="text" value="4, 11, 17, 23, 31, 38, 44, 52, 67, 85"
+              class="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-700 focus:border-cyan-400 text-sm font-mono-code text-white outline-none" />
+          </div>
+
+          <div id="viz-target-wrapper" class="md:col-span-3">
+            <label id="viz-target-label" for="viz-target-input" class="block text-xs font-mono-code text-slate-300 mb-1.5">
+              Search Target Value:
+            </label>
+            <input id="viz-target-input" type="text" value="38"
+              class="w-full px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-700 focus:border-cyan-400 text-sm font-mono-code text-cyan-300 outline-none" />
+          </div>
+
+          <div class="md:col-span-2">
+            <button type="button" onclick="window.DSAVisualizer.loadCustomInputs(false, true)"
+              class="w-full px-4 py-2 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-extrabold text-xs sm:text-sm transition">
+              Load &amp; Trace
+            </button>
+          </div>
+        </div>
+
+        <!-- Validation & Unsorted Warning Banner -->
+        <div id="viz-validation-banner" class="hidden p-3.5 rounded-xl bg-amber-500/15 border border-amber-400/50"></div>
+
+        <!-- One-Click Presets Bar -->
+        <div class="flex flex-wrap items-center gap-2 pt-1">
+          <span class="text-xs font-mono-code text-slate-400">Quick Presets:</span>
+          <div id="viz-presets-bar" class="flex flex-wrap gap-2"></div>
+        </div>
+      </div>
+
+      <!-- Visual Array Stage + Playback Bar -->
+      <div class="cyber-card p-5 sm:p-6 space-y-5 border-cyan-500/30">
+        <!-- Top Telemetry Bar -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <span id="viz-phase-badge" class="px-2.5 py-1 rounded-md bg-cyan-500/20 border border-cyan-400/50 text-cyan-300 font-mono-code font-bold text-xs">INITIALIZE</span>
+            <span id="viz-step-counter" class="text-xs font-mono-code text-slate-400">Step 1 of 5</span>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-4 text-xs font-mono-code">
+            <div>Active Search Space: <strong id="viz-metric-active" class="text-cyan-300">10 / 10</strong></div>
+            <div>Comparisons: <strong id="viz-metric-comparisons" class="text-amber-300">0</strong></div>
+            <div>Complexity: <strong id="viz-metric-complexity" class="text-violet-300">O(log n)</strong></div>
+          </div>
+        </div>
+
+        <!-- Array Cells Stage -->
+        <div id="viz-array-stage" class="py-6 px-2 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 min-h-[148px]"></div>
+
+        <!-- Beginner-Friendly Step Explanation Callout -->
+        <div class="p-4 rounded-xl bg-slate-950/90 border border-cyan-500/30 flex items-start gap-3">
+          <span class="text-lg">🧭</span>
+          <div>
+            <div class="text-[11px] font-mono-code uppercase tracking-wider text-cyan-400 font-bold mb-0.5">What Is Happening at This Step &amp; Why</div>
+            <p id="viz-step-explanation" class="text-xs sm:text-sm text-slate-100 leading-relaxed"></p>
+          </div>
+        </div>
+
+        <!-- Playback Controls & Speed Slider -->
+        <div class="flex flex-wrap items-center justify-between gap-4 pt-2 border-t border-slate-800">
+          <div class="flex flex-wrap items-center gap-2">
+            <button type="button" id="viz-play-btn" onclick="window.DSAVisualizer.togglePlay()"
+              class="px-4 py-2 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-extrabold text-xs sm:text-sm transition">
+              <span>▶ Play Auto</span>
+            </button>
+            <button type="button" onclick="window.DSAVisualizer.stepBackward()"
+              class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold text-xs sm:text-sm transition">
+              ⏮ Step Back
+            </button>
+            <button type="button" onclick="window.DSAVisualizer.stepForward()"
+              class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/40 font-semibold text-xs sm:text-sm transition">
+              ⏭ Step Forward
+            </button>
+            <button type="button" onclick="window.DSAVisualizer.resetVisualizer()"
+              class="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800 text-xs sm:text-sm transition">
+              ↺ Reset
+            </button>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <label for="viz-speed-slider" class="text-xs font-mono-code text-slate-400">Speed (<span id="viz-speed-label" class="text-cyan-300">1.0x</span>):</label>
+            <input id="viz-speed-slider" type="range" min="1" max="5" value="3"
+              oninput="window.DSAVisualizer.updateSpeed(this.value)"
+              class="cyber-slider w-28" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Synchronized C++ Implementation & Legend -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <div class="lg:col-span-7 cyber-card p-5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono-code font-bold text-cyan-400">// SYNCHRONIZED C++ IMPLEMENTATION</span>
+            <span class="text-[11px] font-mono-code text-slate-400">Highlighted line = current step</span>
+          </div>
+          <div id="viz-cpp-code" class="p-3 rounded-xl bg-slate-950 border border-slate-800 space-y-0.5 overflow-x-auto"></div>
+        </div>
+
+        <div class="lg:col-span-5 cyber-card p-5 flex flex-col justify-between space-y-4">
+          <div>
+            <span class="text-xs font-mono-code font-bold text-violet-400">// BEGINNER MENTOR NOTES</span>
+            <h3 class="text-base font-bold text-white mt-1 mb-2">Why Binary Search Is So Fast</h3>
+            <p class="text-xs text-slate-300 leading-relaxed mb-3">
+              Imagine looking for a page in a 1,000-page dictionary. Checking page 1, page 2, page 3 (<strong>Linear Search</strong>) takes up to 1,000 steps. Opening straight to page 500 and tearing the wrong half away (<strong>Binary Search</strong>) finds any page in at most <strong>10 steps</strong> because <code class="text-cyan-300">2¹⁰ = 1,024</code>!
+            </p>
+            <div class="space-y-2 text-xs">
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded bg-cyan-400 text-slate-950 font-extrabold text-[10px]">LOW</span>
+                <span class="text-slate-300">Left boundary of the remaining search window</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded bg-amber-400 text-slate-950 font-extrabold text-[10px]">MID</span>
+                <span class="text-slate-300">Middle element currently being compared with target</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded bg-violet-400 text-slate-950 font-extrabold text-[10px]">HIGH</span>
+                <span class="text-slate-300">Right boundary of the remaining search window</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded bg-emerald-500 text-slate-950 font-extrabold text-[10px]">FOUND</span>
+                <span class="text-slate-300">Target locked or element placed in final sorted index</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-900/90 border border-slate-800 text-xs text-slate-300">
+            <strong class="text-cyan-300">Pro C++ Tip:</strong> Always write <code class="text-amber-300 font-mono-code">mid = low + (high - low) / 2</code> instead of <code class="font-mono-code">(low + high) / 2</code> so large indices never overflow a 32-bit signed <code class="font-mono-code">int</code>!
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 4: DAILY CODING QUESTS & CHALLENGE OF THE DAY
+         ==================================================================== -->
+    <section id="view-daily" class="hidden space-y-8">
+      <!-- Challenge of the Day Boss Container -->
+      <div id="cotd-boss-container" class="cyber-card p-5 sm:p-6 border-amber-400/40"></div>
+
+      <!-- Daily Coding Micro-Quests Deck -->
+      <div class="space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <span class="text-xs font-mono-code text-cyan-400 font-bold uppercase">// RAPID DRILLS</span>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-white">Daily Coding Quests (8 Drills)</h2>
+          </div>
+          <div id="daily-category-bar" class="flex flex-wrap gap-1.5"></div>
+        </div>
+
+        <div id="daily-quests-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 5: COMMUNITY LEADERBOARD (HONEST DEMO DATA + CLOUD ROADMAP)
+         ==================================================================== -->
+    <section id="view-leaderboard" class="hidden space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <span class="text-xs font-mono-code text-cyan-400 font-bold uppercase">// ACADEMY STANDINGS</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-0.5">Community Leaderboard</h2>
+        </div>
+        <button type="button" onclick="window.DSAQuestApp.simulateXpBoost()"
+          class="px-4 py-2 rounded-xl bg-violet-500/20 hover:bg-violet-500/30 border border-violet-400/60 text-violet-200 text-xs font-mono-code font-bold transition self-start sm:self-auto">
+          ⚡ Simulate +200 XP Boost (Test Rank Climb)
+        </button>
+      </div>
+
+      <!-- Honest Demo Transparency Banner -->
+      <div class="p-4 rounded-xl bg-amber-500/10 border border-amber-400/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div class="space-y-1">
+          <div class="text-xs font-mono-code font-bold text-amber-300 uppercase">📌 Honest Architecture Notice: Local Sandbox + Demo Peers</div>
+          <p class="text-xs text-slate-200 leading-relaxed">
+            Your own row (<strong class="text-cyan-300">YOU</strong>) reflects your real live XP and completed quests stored in your browser's <code class="font-mono-code text-amber-200">localStorage</code>. The other 5 entries are <strong>simulated example learners</strong> so you can preview how the leaderboard ranks players before connecting a shared database.
+          </p>
+        </div>
+      </div>
+
+      <!-- Leaderboard Table -->
+      <div class="cyber-card overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-slate-800 bg-slate-900/90 text-[11px] font-mono-code text-slate-400 uppercase">
+                <th class="py-3.5 px-4">Rank</th>
+                <th class="py-3.5 px-4">Adventurer</th>
+                <th class="py-3.5 px-4">Academy Title</th>
+                <th class="py-3.5 px-4 text-center">Sectors</th>
+                <th class="py-3.5 px-4 text-center">Streak</th>
+                <th class="py-3.5 px-4 text-right">Total XP</th>
+              </tr>
+            </thead>
+            <tbody id="leaderboard-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Developer Blueprint: How to Add Real Cloud Sync Later -->
+      <div class="cyber-card p-5 space-y-3 border-violet-500/30">
+        <div class="text-xs font-mono-code font-bold text-violet-300 uppercase">// DEVELOPER UPGRADE PATH: ADDING REAL ACCOUNTS &amp; LIVE LEADERBOARD</div>
+        <h3 class="text-base font-bold text-white">How to Connect Supabase or Firebase Later (Zero Backend Server Required)</h3>
+        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+          Because GitHub Pages hosts static HTML/CSS/JS files for free, it doesn't run a database server by itself. When you're ready to share a live leaderboard with your C++ community, you can connect a free <strong>Supabase</strong> (PostgreSQL) or <strong>Firebase</strong> project in ~20 lines of JavaScript:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+          <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+            <div class="font-bold text-cyan-300 mb-1">1. Create a `profiles` Table</div>
+            <p class="text-slate-400">Columns: <code class="text-slate-200">id (uuid)</code>, <code class="text-slate-200">username (text)</code>, <code class="text-slate-200">xp (int4)</code>, <code class="text-slate-200">quests_done (int4)</code>, <code class="text-slate-200">streak (int4)</code>.</p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+            <div class="font-bold text-violet-300 mb-1">2. Enable GitHub OAuth Login</div>
+            <p class="text-slate-400">Use <code class="text-slate-200">supabase.auth.signInWithOAuth({ provider: 'github' })</code> so learners sign in with their GitHub account.</p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+            <div class="font-bold text-emerald-300 mb-1">3. Replace `demoLeaderboard`</div>
+            <p class="text-slate-400">Fetch top 20 learners with <code class="text-slate-200">supabase.from('profiles').select('*').order('xp', { ascending: false }).limit(20)</code>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         VIEW 6: PROGRESS DASHBOARD, ACHIEVEMENTS & SHAREABLE RESULTS
+         ==================================================================== -->
+    <section id="view-dashboard" class="hidden space-y-8">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <span class="text-xs font-mono-code text-cyan-400 font-bold uppercase">// ADVENTURER RECORD &amp; BADGES</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-0.5">Progress Dashboard &amp; Share Card</h2>
+        </div>
+
+        <!-- Custom Callsign Editor -->
+        <div class="flex items-center gap-2">
+          <label for="dash-adventurer-name" class="text-xs font-mono-code text-slate-400">Callsign:</label>
+          <input id="dash-adventurer-name" type="text" value="CyberCadet" maxlength="24"
+            onchange="window.DSAQuestApp.updateAdventurerName(this.value)"
+            class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs font-mono-code text-cyan-300 focus:border-cyan-400 outline-none" />
+          <button type="button" onclick="window.DSAQuestApp.updateAdventurerName(document.getElementById('dash-adventurer-name').value)"
+            class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700 transition">
+            Save
+          </button>
+        </div>
+      </div>
+
+      <!-- 4 Summary Metric Cards -->
+      <div id="dash-summary-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+
+      <!-- Shareable Results Card Generator -->
+      <div class="cyber-card p-5 sm:p-6 border-cyan-500/30 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+        <div class="lg:col-span-6 space-y-2.5">
+          <span class="text-xs font-mono-code text-cyan-400 font-bold uppercase">// SHARE WITH YOUR COMMUNITY</span>
+          <h3 class="text-lg font-bold text-white">Shareable Progress Snapshot</h3>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Copy a formatted ASCII/Emoji progress card (just like Wordle or LeetCode daily shares) to post in your Discord, WhatsApp, or study group chat!
+          </p>
+          <div class="flex flex-wrap gap-2.5 pt-2">
+            <button type="button" onclick="window.DSAQuestApp.copyShareableResult()"
+              class="px-4 py-2 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-extrabold text-xs sm:text-sm transition">
+              📋 Copy Share Card to Clipboard
+            </button>
+            <button type="button" onclick="window.DSAQuestApp.openResetModal()"
+              class="px-3.5 py-2 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/40 font-semibold text-xs sm:text-sm transition">
+              ↺ Reset Local Progress
+            </button>
+          </div>
+        </div>
+        <div class="lg:col-span-6">
+          <pre id="share-card-text-preview" class="p-4 rounded-xl bg-slate-950 border border-cyan-500/40 font-mono-code text-xs sm:text-sm text-cyan-200 overflow-x-auto leading-relaxed"></pre>
+        </div>
+      </div>
+
+      <!-- 8 Achievements Grid -->
+      <div class="space-y-3">
+        <h3 class="text-lg font-bold text-white">Academy Achievements &amp; Milestones (8 Badges)</h3>
+        <div id="dash-achievements-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================================================================
+       MODAL 1: INTERACTIVE QUEST TERMINAL
+       ====================================================================== -->
+  <div id="quest-terminal-modal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div id="quest-terminal-content" class="cyber-card w-full max-w-2xl p-5 sm:p-6 border-cyan-400/50 max-h-[90vh] overflow-y-auto"></div>
+  </div>
+
+  <!-- ======================================================================
+       MODAL 2: RESET PROGRESS CONFIRMATION (NO BROWSER CONFIRM())
+       ====================================================================== -->
+  <div id="reset-confirm-modal" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="cyber-card w-full max-w-md p-6 border-rose-500/50 space-y-4">
+      <h3 class="text-lg font-bold text-white">Reset Local Academy Progress?</h3>
+      <p class="text-xs sm:text-sm text-slate-300">
+        This will reset your XP back to 120 XP and clear completed quests and unlocked badges in this browser.
+      </p>
+      <div class="flex items-center justify-end gap-2.5">
+        <button type="button" onclick="window.DSAQuestApp.closeResetModal()"
+          class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold">
+          Cancel
+        </button>
+        <button type="button" onclick="window.DSAQuestApp.confirmResetProgress()"
+          class="px-4 py-2 rounded-xl bg-rose-500 hover:bg-rose-400 text-white text-xs font-bold">
+          Confirm Reset
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-900 mt-12 py-6 text-center text-xs text-slate-500 font-mono-code">
+    DSA QUEST // Built with pure HTML, CSS &amp; Vanilla JavaScript · Ready for GitHub Pages Deployment
+  </footer>
+
+  <!-- Modular Application Scripts -->
+  <script>
+/* ==========================================================================
+   DSA QUEST // Cybernetic C++ & Algorithms Academy
+   File: data.js
+   Beginner Note: Keeping all curriculum data, quests, achievements, and demo
+   leaderboard records in a dedicated file makes it super easy to add new
+   C++ challenges or levels without touching the UI logic!
+   ========================================================================== */
+
+window.DSA_QUEST_DATA = {
+  // Rank progression thresholds based on Adventurer XP
+  ranks: [
+    { level: 1, title: "Novice Cadet", minXp: 0, badge: "I", color: "#38bdf8" },
+    { level: 2, title: "Syntax Ranger", minXp: 150, badge: "II", color: "#00f0ff" },
+    { level: 3, title: "Memory Architect", minXp: 350, badge: "III", color: "#818cf8" },
+    { level: 4, title: "Pointer Vanguard", minXp: 600, badge: "IV", color: "#a855f7" },
+    { level: 5, title: "Algorithm Knight", minXp: 900, badge: "V", color: "#10b981" },
+    { level: 6, title: "Grandmaster of O(1)", minXp: 1300, badge: "VI", color: "#f59e0b" }
+  ],
+
+  // 8 Main Progression Nodes on the Quest Map
+  questMap: [
+    {
+      id: "q1-variables",
+      sector: "SECTOR 01",
+      title: "Memory Forge: Variables & Types",
+      subtitle: "Stack memory slots, primitive types, and type safety in C++",
+      difficulty: "Beginner",
+      xpReward: 100,
+      requiredXp: 0,
+      complexity: "O(1) Space & Time",
+      tags: ["int", "double", "bool", "sizeof"],
+      conceptSummary:
+        "In C++, every variable is a named storage chamber in computer memory with a fixed size and type. Unlike dynamically typed languages, C++ checks types at compile time so the CPU knows the exact number of bytes to read and write.",
+      cppExample: `#include <iostream>
+using namespace std;
+
+int main() {
+    int shieldEnergy = 120;       // 4 bytes (typically) signed integer
+    double warpMultiplier = 2.5;  // 8 bytes floating-point precision
+    bool isCoreOnline = true;     // 1 byte boolean state
+
+    // Integer division truncates decimals in C++!
+    int halfCells = 7 / 2;        // Evaluates to 3, NOT 3.5
+    cout << "Half cells: " << halfCells << endl;
+    return 0;
+}`,
+      challengeQuestion:
+        "Mission Check: In C++, if you execute `int crystalCount = 15 / 4;`, what exact integer value is stored inside `crystalCount`?",
+      expectedAnswers: ["3", "3;", "int crystalcount = 3"],
+      multipleChoiceOptions: [
+        { label: "3 (Integer division truncates the .75 remainder)", value: "3" },
+        { label: "3.75 (Automatically converts to double)", value: "3.75" },
+        { label: "4 (Rounds up to nearest integer)", value: "4" },
+        { label: "Compiler Error", value: "error" }
+      ],
+      hints: [
+        "Look closely at the types of 15 and 4: both are `int` literals.",
+        "When C++ divides an `int` by an `int`, it discards everything after the decimal point (truncation toward zero). What is 15 divided by 4 without the remainder?"
+      ],
+      solutionExplanation:
+        "Because both `15` and `4` are integer literals, C++ performs integer division. `15 / 4` is `3` with a remainder of `3`. The fractional `.75` is truncated, storing `3` in `crystalCount`. To get `3.75`, use `double result = 15.0 / 4;`."
+    },
+    {
+      id: "q2-control-flow",
+      sector: "SECTOR 02",
+      title: "Logic Gates: Loops & Conditions",
+      subtitle: "Branching with if/else and iterating efficiently with for/while loops",
+      difficulty: "Beginner",
+      xpReward: 120,
+      requiredXp: 0,
+      complexity: "O(n) Iteration",
+      tags: ["if / else", "for loop", "while", "modulo %"],
+      conceptSummary:
+        "Control flow directs the CPU's instruction pointer. Conditional branches (`if/else`) pick execution paths, while loops (`for`, `while`) repeat a block until a boundary condition becomes false.",
+      cppExample: `#include <iostream>
+using namespace std;
+
+int sumEvenBeacons(int n) {
+    int total = 0;
+    // Start at 2, step by +2 each iteration
+    for (int i = 2; i <= n; i += 2) {
+        total += i;
+    }
+    return total;
+}`,
+      challengeQuestion:
+        "Trace the C++ function above: What value does `sumEvenBeacons(8)` return after the `for` loop finishes?",
+      expectedAnswers: ["20", "20;"],
+      multipleChoiceOptions: [
+        { label: "12 (Sums 2 + 4 + 6)", value: "12" },
+        { label: "20 (Sums 2 + 4 + 6 + 8)", value: "20" },
+        { label: "36 (Sums 1 through 8)", value: "36" },
+        { label: "18 (Skips 2)", value: "18" }
+      ],
+      hints: [
+        "Check the loop condition: `i <= 8` means `8` IS included in the final iteration.",
+        "Add the values of `i` visited: `2 + 4 + 6 + 8`."
+      ],
+      solutionExplanation:
+        "The loop starts at `i = 2` and increments by `2` while `i <= 8`. It visits `i = 2`, `4`, `6`, and `8`. Their sum is `2 + 4 + 6 + 8 = 20`."
+    },
+    {
+      id: "q3-functions-refs",
+      sector: "SECTOR 03",
+      title: "Subroutines: Pass-by-Reference",
+      subtitle: "Why `&` references avoid expensive copies and let functions mutate variables",
+      difficulty: "Beginner+",
+      xpReward: 140,
+      requiredXp: 100,
+      complexity: "O(1) Alias Binding",
+      tags: ["functions", "pass-by-value", "pass-by-reference &", "const &"],
+      conceptSummary:
+        "By default, C++ passes arguments by value (making a copy). Adding `&` creates a reference—an alias to the original variable—allowing functions to modify the caller's variable directly or read large vectors in `O(1)` time without copying!",
+      cppExample: `#include <iostream>
+using namespace std;
+
+void boostShield(int &shield, int bonus) {
+    shield += bonus * 2; // Modifies original variable via reference!
+}
+
+int main() {
+    int myShield = 50;
+    boostShield(myShield, 15);
+    cout << myShield; // What prints here?
+}`,
+      challengeQuestion:
+        "Because `shield` is passed by reference (`int &shield`), what value is printed for `myShield` in `main()`?",
+      expectedAnswers: ["80", "80;"],
+      multipleChoiceOptions: [
+        { label: "50 (Pass-by-value leaves myShield unchanged)", value: "50" },
+        { label: "65 (Adds 15 once)", value: "65" },
+        { label: "80 (Modifies myShield directly: 50 + 15 * 2)", value: "80" },
+        { label: "130 ((50 + 15) * 2)", value: "130" }
+      ],
+      hints: [
+        "Notice the ampersand `int &shield` in the function parameter list—that means `shield` is an alias for `myShield`.",
+        "Inside `boostShield`, `bonus * 2` is `15 * 2 = 30`, which is added directly to `myShield` (`50 + 30`)."
+      ],
+      solutionExplanation:
+        "Passing `int &shield` binds `shield` directly to `myShield` in memory. Computing `shield += 15 * 2` adds `30` to `50`, updating `myShield` to `80`."
+    },
+    {
+      id: "q4-arrays-vectors",
+      sector: "SECTOR 04",
+      title: "Contiguous Vaults: Arrays & std::vector",
+      subtitle: "Zero-indexed contiguous memory, O(1) random access, and dynamic resizing",
+      difficulty: "Intermediate",
+      xpReward: 160,
+      requiredXp: 200,
+      complexity: "O(1) Access / O(n) Search",
+      tags: ["std::vector", "0-indexing", "push_back", "contiguous memory"],
+      conceptSummary:
+        "Arrays and `std::vector` store elements side-by-side in contiguous RAM. Because every element has the same byte size, C++ computes the address of index `i` instantly via `base_address + i * sizeof(T)` in `O(1)` constant time!",
+      cppExample: `#include <vector>
+#include <iostream>
+using namespace std;
+
+int main() {
+    vector<int> cores = {10, 25, 40, 55, 70};
+    cores.push_back(85);
+    int ans = cores[0] + cores[cores.size() - 1];
+    cout << ans << endl;
+}`,
+      challengeQuestion:
+        "After `cores.push_back(85)`, what value is stored in `ans` (`cores[0] + cores[cores.size() - 1]`)?",
+      expectedAnswers: ["95", "95;"],
+      multipleChoiceOptions: [
+        { label: "80 (10 + 70)", value: "80" },
+        { label: "95 (First element 10 + new last element 85)", value: "95" },
+        { label: "110 (25 + 85)", value: "110" },
+        { label: "Out of bounds error", value: "error" }
+      ],
+      hints: [
+        "`cores[0]` is the very first element (`10`).",
+        "`push_back(85)` appends `85` to the end of the vector, making `cores[cores.size() - 1]` equal to `85`."
+      ],
+      solutionExplanation:
+        "`cores[0]` is `10`. After `cores.push_back(85)`, the vector has 6 elements and its last element at `cores[5]` is `85`. `10 + 85 = 95`."
+    },
+    {
+      id: "q5-binary-search",
+      sector: "SECTOR 05",
+      title: "The Halving Protocol: Binary Search",
+      subtitle: "Eliminating half the search space every step for O(log n) logarithmic speed",
+      difficulty: "Intermediate",
+      xpReward: 200,
+      requiredXp: 350,
+      complexity: "O(log n) Time / O(1) Space",
+      tags: ["binary search", "divide & conquer", "sorted invariant", "O(log n)"],
+      conceptSummary:
+        "Linear search checks elements one by one (`O(n)`). When data is sorted, Binary Search jumps straight to the middle (`mid = low + (high - low) / 2`). One comparison tells us which half cannot contain the target, slicing 1,000,000 elements down to 1 in at most 20 steps!",
+      cppExample: `int binarySearch(const vector<int>& arr, int target) {
+    int low = 0, high = (int)arr.size() - 1;
+    while (low <= high) {
+        int mid = low + (high - low) / 2; // Prevents integer overflow!
+        if (arr[mid] == target) return mid;
+        if (arr[mid] < target) low = mid + 1;  // Discard left half
+        else high = mid - 1;                   // Discard right half
+    }
+    return -1;
+}`,
+      challengeQuestion:
+        "Given sorted array `arr = {4, 9, 15, 22, 31, 44, 58}` (indices 0 to 6) and `target = 44`, what index is `mid` on Step 1, and what becomes the new `low` index for Step 2?",
+      expectedAnswers: ["mid=3, low=4", "3 and 4", "mid 3 low 4"],
+      multipleChoiceOptions: [
+        { label: "mid = 3 (value 22), then low moves to 4", value: "mid=3, low=4" },
+        { label: "mid = 3 (value 22), then high moves to 2", value: "mid=3, high=2" },
+        { label: "mid = 4 (value 31), then low moves to 5", value: "mid=4, low=5" },
+        { label: "mid = 2 (value 15), then low moves to 3", value: "mid=2, low=3" }
+      ],
+      hints: [
+        "Initially `low = 0` and `high = 6`. Compute `mid = 0 + (6 - 0) / 2 = 3`.",
+        "At index 3, `arr[3]` is `22`. Since `22 < 44` (`arr[mid] < target`), we discard indices `0..3` and set `low = mid + 1`."
+      ],
+      solutionExplanation:
+        "On Step 1, `low = 0` and `high = 6`, so `mid = 3` (`arr[3] = 22`). Since `22 < 44`, the target must lie to the right of index 3. The algorithm eliminates indices `0..3` and updates `low = mid + 1 = 4`."
+    },
+    {
+      id: "q6-sorting",
+      sector: "SECTOR 06",
+      title: "Order Engines: Sorting & Complexity",
+      subtitle: "Comparing O(n²) Selection/Bubble Sort against O(n log n) std::sort",
+      difficulty: "Intermediate+",
+      xpReward: 200,
+      requiredXp: 500,
+      complexity: "O(n²) vs O(n log n)",
+      tags: ["Selection Sort", "std::sort", "Introsort", "in-place swap"],
+      conceptSummary:
+        "Quadratic sorts like Selection Sort repeatedly scan the unsorted suffix to find the minimum element and swap it to the front (`n + (n-1) + ... + 1 = O(n²)`). C++'s built-in `std::sort` uses Introsort (QuickSort + HeapSort + InsertionSort) to guarantee `O(n log n)` worst-case speed.",
+      cppExample: `#include <algorithm>
+#include <vector>
+using namespace std;
+
+void selectionSortPass(vector<int>& a) {
+    // First pass (i = 0): find minimum in a[0..n-1] and swap with a[0]
+    int minIdx = 0;
+    for (int j = 1; j < (int)a.size(); j++) {
+        if (a[j] < a[minIdx]) minIdx = j;
+    }
+    swap(a[0], a[minIdx]);
+}`,
+      challengeQuestion:
+        "If `a = {29, 14, 37, 9, 21}`, what is the state of vector `a` right after `selectionSortPass(a)` completes the very first pass (`i = 0`)?",
+      expectedAnswers: ["9, 14, 37, 29, 21", "{9, 14, 37, 29, 21}"],
+      multipleChoiceOptions: [
+        { label: "{9, 14, 37, 29, 21} (Swaps minimum 9 at index 3 with 29 at index 0)", value: "9, 14, 37, 29, 21" },
+        { label: "{14, 29, 37, 9, 21} (Swaps adjacent first two elements)", value: "14, 29, 37, 9, 21" },
+        { label: "{9, 14, 21, 29, 37} (Fully sorted in one pass)", value: "9, 14, 21, 29, 37" },
+        { label: "{9, 29, 14, 37, 21} (Shifts elements right)", value: "9, 29, 14, 37, 21" }
+      ],
+      hints: [
+        "Selection sort scans the entire array to find the smallest element (`9` at index 3).",
+        "At the end of pass 1, it performs a single `swap(a[0], a[3])`, exchanging `29` and `9`."
+      ],
+      solutionExplanation:
+        "Selection Sort locates the global minimum `9` at index `3` and swaps `a[0]` (`29`) with `a[3]` (`9`), producing `{9, 14, 37, 29, 21}`."
+    },
+    {
+      id: "q7-pointers-linked-lists",
+      sector: "SECTOR 07",
+      title: "Pointer Nexus: Memory Addresses & Nodes",
+      subtitle: "Dereferencing pointers (*ptr), address-of (&), and Linked List chains",
+      difficulty: "Advanced",
+      xpReward: 220,
+      requiredXp: 700,
+      complexity: "O(1) Pointer Rewiring",
+      tags: ["pointers *", "nullptr", "ListNode", "arrow operator ->"],
+      conceptSummary:
+        "A pointer holds the raw memory address of another variable. Linked Lists use pointers to connect non-contiguous `Node` structs scattered across the heap, enabling `O(1)` insertion and deletion once you have a pointer to the node!",
+      cppExample: `struct Node {
+    int val;
+    Node* next;
+    Node(int v) : val(v), next(nullptr) {}
+};
+
+// Rewiring a node chain: A(10) -> B(20) -> C(30)
+// If we execute: A->next = B->next;
+// What is A->next->val now?`,
+      challengeQuestion:
+        "In a singly linked list `A(10) -> B(20) -> C(30)`, after executing `A->next = B->next;`, what is the value of `A->next->val`?",
+      expectedAnswers: ["30", "30;"],
+      multipleChoiceOptions: [
+        { label: "30 (Node A now points directly to Node C, bypassing B)", value: "30" },
+        { label: "20 (Node A still points to Node B)", value: "20" },
+        { label: "10 (Node A points to itself)", value: "10" },
+        { label: "Segmentation fault (nullptr)", value: "segfault" }
+      ],
+      hints: [
+        "`B->next` holds the address of Node `C(30)`.",
+        "Assigning `A->next = B->next` makes `A->next` point straight to Node `C`."
+      ],
+      solutionExplanation:
+        "`B->next` points to Node `C(30)`. Setting `A->next = B->next` bypasses Node `B` in `O(1)` time so `A->next` points directly to `C`, whose `.val` is `30`."
+    },
+    {
+      id: "q8-stacks-trees",
+      sector: "SECTOR 08",
+      title: "Recursive Citadel: Stacks & Binary Search Trees",
+      subtitle: "LIFO call stacks, base cases, and hierarchical O(log n) tree traversal",
+      difficulty: "Advanced",
+      xpReward: 250,
+      requiredXp: 900,
+      complexity: "O(h) Tree Height",
+      tags: ["std::stack", "recursion", "BST property", "inorder traversal"],
+      conceptSummary:
+        "In a Binary Search Tree (BST), every node in the left subtree is smaller than the root, and every node in the right subtree is larger. An In-Order traversal (`Left -> Root -> Right`) visits every node in strictly ascending sorted order!",
+      cppExample: `void inorder(TreeNode* root) {
+    if (root == nullptr) return; // Base case stops infinite recursion
+    inorder(root->left);         // 1. Visit all smaller values
+    cout << root->val << " ";    // 2. Process current root
+    inorder(root->right);        // 3. Visit all larger values
+}`,
+      challengeQuestion:
+        "Given a BST with Root `50`, Left Child `30`, and Right Child `70`, in what exact order does `inorder(root)` print the values?",
+      expectedAnswers: ["30 50 70", "30, 50, 70"],
+      multipleChoiceOptions: [
+        { label: "30 50 70 (Left -> Root -> Right produces sorted order)", value: "30 50 70" },
+        { label: "50 30 70 (Pre-order: Root -> Left -> Right)", value: "50 30 70" },
+        { label: "30 70 50 (Post-order: Left -> Right -> Root)", value: "30 70 50" },
+        { label: "70 50 30 (Reverse sorted order)", value: "70 50 30" }
+      ],
+      hints: [
+        "In-order traversal always finishes `inorder(root->left)` before printing `root->val`.",
+        "For a valid BST, In-Order traversal always outputs values in ascending sorted order."
+      ],
+      solutionExplanation:
+        "`inorder(root)` visits the left child (`30`), prints the root (`50`), and then visits the right child (`70`), outputting `30 50 70`."
+    }
+  ],
+
+  // 8 Bite-Sized Daily Coding Micro-Quests
+  dailyQuests: [
+    {
+      id: "dq-modulo",
+      category: "C++ Basics",
+      title: "Parity Scanner (Modulo %)",
+      xp: 50,
+      prompt: "What does the C++ expression `47 % 5` evaluate to?",
+      codeSnippet: `int remainder = 47 % 5; // % gives the remainder after integer division`,
+      answer: "2",
+      options: ["2", "9", "4", "0"],
+      hint: "5 * 9 = 45. Subtract 45 from 47 to find the remainder.",
+      explanation: "`47 / 5` is `9` with a remainder of `2` (`47 = 5 * 9 + 2`), so `47 % 5` evaluates to `2`."
+    },
+    {
+      id: "dq-short-circuit",
+      category: "C++ Basics",
+      title: "Safe Bounds Guard (&&)",
+      xp: 50,
+      prompt: "When checking index `i` before reading `arr[i]`, which condition order prevents an out-of-bounds crash?",
+      codeSnippet: `// Option A: if (i < n && arr[i] == target)\n// Option B: if (arr[i] == target && i < n)`,
+      answer: "i < n && arr[i] == target",
+      options: [
+        "i < n && arr[i] == target",
+        "arr[i] == target && i < n",
+        "Both are equally safe",
+        "Neither works in C++"
+      ],
+      hint: "C++ evaluates `&&` from left to right and stops immediately (short-circuits) if the left side is false.",
+      explanation: "`i < n && arr[i] == target` uses short-circuit evaluation: if `i < n` is false, C++ never evaluates `arr[i]`, preventing an out-of-bounds memory read!"
+    },
+    {
+      id: "dq-string-pal",
+      category: "Arrays & Strings",
+      title: "String Mirror Indexing",
+      xp: 60,
+      prompt: "For `string s = \"RADAR\";` of length `n = 5`, if `left = 1`, what index expression points to its mirror character from the right end?",
+      codeSnippet: `int n = s.length(); // 5\nint right = ???;    // When left = 0 -> right = 4; when left = 1 -> right = 3`,
+      answer: "n - 1 - left",
+      options: ["n - 1 - left", "n - left", "n + left - 1", "left + 1"],
+      hint: "Check when `left = 0`: the last valid index is `n - 1`. As `left` increases by 1, `right` decreases by 1.",
+      explanation: "Because C++ strings are 0-indexed (`0` to `n - 1`), the mirror partner of index `left` is always `(n - 1) - left`."
+    },
+    {
+      id: "dq-max-sub",
+      category: "Arrays & Strings",
+      title: "Prefix Sum Query in O(1)",
+      xp: 65,
+      prompt: "Given `arr = {3, 5, 2, 8}` and prefix sum array `pref = {3, 8, 10, 18}`, what is `pref[3] - pref[0]`?",
+      codeSnippet: `// pref[i] stores sum of arr[0..i]\nint rangeSum = pref[3] - pref[0]; // Sum of arr[1..3]`,
+      answer: "15",
+      options: ["15", "18", "10", "21"],
+      hint: "`pref[3]` is `18` (`3+5+2+8`) and `pref[0]` is `3`. Subtract them!",
+      explanation: "`pref[3] - pref[0] = 18 - 3 = 15`, which equals `arr[1] + arr[2] + arr[3] = 5 + 2 + 8 = 15` in `O(1)` time!"
+    },
+    {
+      id: "dq-bsearch-mid",
+      category: "Searching & Sorting",
+      title: "Overflow-Proof Midpoint",
+      xp: 65,
+      prompt: "Why do experienced C++ programmers write `low + (high - low) / 2` instead of `(low + high) / 2`?",
+      codeSnippet: `int mid = low + (high - low) / 2;`,
+      answer: "Prevents 32-bit signed int overflow when low + high > INT_MAX",
+      options: [
+        "Prevents 32-bit signed int overflow when low + high > INT_MAX",
+        "It runs in O(1) instead of O(n)",
+        "C++ forbids adding two variables inside parentheses",
+        "It automatically sorts the array"
+      ],
+      hint: "A 32-bit signed `int` maxes out at `2,147,483,647`. What happens if `low` and `high` are both `1,500,000,000`?",
+      explanation: "If `low + high` exceeds `2,147,483,647` (`INT_MAX`), `(low + high)` overflows into negative territory! `low + (high - low) / 2` computes the exact same midpoint safely without ever overflowing."
+    },
+    {
+      id: "dq-log2-steps",
+      category: "Searching & Sorting",
+      title: "Logarithmic Superpower",
+      xp: 60,
+      prompt: "At most how many comparisons does Binary Search need to check a sorted `std::vector` of `1,024` elements?",
+      codeSnippet: `// Each step cuts N in half: 1024 -> 512 -> 256 -> ... -> 1`,
+      answer: "11",
+      options: ["11", "512", "1024", "32"],
+      hint: "`2^10 = 1024`. Halving 1,024 ten times reaches 1 element, plus 1 final check!",
+      explanation: "Since `2^10 = 1024`, Binary Search halves the range at most `10` times plus `1` final comparison (`⌊log₂(1024)⌋ + 1 = 11` steps max) compared to `1,024` steps for Linear Search!"
+    },
+    {
+      id: "dq-stack-lifo",
+      category: "Pointers & DSA",
+      title: "LIFO Stack Trace",
+      xp: 70,
+      prompt: "If we push `10`, push `20`, push `30`, pop once, and push `40` onto a `std::stack<int>`, what is `st.top()`?",
+      codeSnippet: `stack<int> st;\nst.push(10); st.push(20); st.push(30);\nst.pop();\nst.push(40);`,
+      answer: "40",
+      options: ["40", "30", "20", "10"],
+      hint: "A stack is Last-In, First-Out (LIFO). Whatever was pushed most recently is on top!",
+      explanation: "`st.pop()` removes `30`, leaving `20` on top. Then `st.push(40)` places `40` at the top of the stack, so `st.top()` returns `40`."
+    },
+    {
+      id: "dq-two-pointers",
+      category: "Pointers & DSA",
+      title: "Sorted Two-Sum Pointer Move",
+      xp: 70,
+      prompt: "In a sorted array `a = {2, 6, 11, 15, 21}` with `L = 0` (`2`) and `R = 4` (`21`), we want target sum `17`. Since `2 + 21 = 23 > 17`, which pointer should move?",
+      codeSnippet: `int sum = a[L] + a[R]; // 2 + 21 = 23\nif (sum > target) { /* Which pointer moves? */ }`,
+      answer: "Decrement R (R--) to decrease the sum",
+      options: [
+        "Decrement R (R--) to decrease the sum",
+        "Increment L (L++) to increase the sum",
+        "Move both L++ and R-- simultaneously",
+        "Reset L = 0"
+      ],
+      hint: "Because the array is sorted in ascending order, moving `L` right makes the sum larger, while moving `R` left makes the sum smaller.",
+      explanation: "Since `23 > 17`, we need a smaller sum. Because the array is sorted ascending, decrementing `R--` (from `21` down to `15`) reduces the sum to `2 + 15 = 17`!"
+    }
+  ],
+
+  // Challenge of the Day (Two Modes: Boss Fight + Beginner Warmup)
+  dailyBossChallenges: {
+    rotated: {
+      id: "cotd-rotated-vault",
+      badge: "CHALLENGE OF THE DAY // INTERMEDIATE BOSS",
+      title: "The Shifted Crystal Vault (Search in Rotated Sorted Array)",
+      xpReward: 250,
+      timeComplexity: "O(log n)",
+      spaceComplexity: "O(1)",
+      story:
+        "A sorted energy array `[4, 7, 11, 18, 25, 33, 42]` was rotated around an unknown pivot into `[18, 25, 33, 42, 4, 7, 11]`. Standard binary search fails if you blindly discard a half—yet one of the two halves (`[low..mid]` or `[mid..high]`) is ALWAYS strictly sorted!",
+      problemStatement:
+        "Given a rotated sorted array `nums` of distinct integers and an integer `target`, return the 0-based index of `target`, or `-1` if it is not present. Your algorithm must run in `O(log n)` time.",
+      testCases: [
+        {
+          id: 1,
+          inputLabel: "nums = [18, 25, 33, 42, 4, 7, 11], target = 4",
+          nums: [18, 25, 33, 42, 4, 7, 11],
+          target: 4,
+          expected: 4,
+          traceNote: "mid=3 (42). Left half [18..42] is sorted, but 4 is not in [18..42] -> search right half [4..11] -> found at index 4!"
+        },
+        {
+          id: 2,
+          inputLabel: "nums = [18, 25, 33, 42, 4, 7, 11], target = 25",
+          nums: [18, 25, 33, 42, 4, 7, 11],
+          target: 25,
+          expected: 1,
+          traceNote: "mid=3 (42). Left half [18..42] is sorted and 25 lies inside [18..42] -> search left half -> found at index 1!"
+        },
+        {
+          id: 3,
+          inputLabel: "nums = [18, 25, 33, 42, 4, 7, 11], target = 10",
+          nums: [18, 25, 33, 42, 4, 7, 11],
+          target: 10,
+          expected: -1,
+          traceNote: "Binary search narrows down to [7, 11] and confirms 10 is absent -> returns -1."
+        },
+        {
+          id: 4,
+          inputLabel: "nums = [3, 1], target = 1 (2-element edge case)",
+          nums: [3, 1],
+          target: 1,
+          expected: 1,
+          traceNote: "mid=0 (3). nums[low] <= nums[mid] holds (3 <= 3), target 1 not in [3..3] -> low = 1 -> found at index 1!"
+        }
+      ],
+      hints: [
+        "Hint 1 (The Key Insight): Pick `mid = low + (high - low) / 2`. Even though the array is rotated, the rotation split point can only sit in ONE half. That means either the left subarray `nums[low..mid]` OR the right subarray `nums[mid..high]` is guaranteed to be normally sorted!",
+        "Hint 2 (How to Check Which Half is Sorted): Compare `nums[low] <= nums[mid]`. If true, the left half `[low..mid]` is sorted! Check if `nums[low] <= target && target < nums[mid]`—if yes, set `high = mid - 1`; otherwise set `low = mid + 1`.",
+        "Hint 3 (When the Right Half is Sorted): If `nums[low] > nums[mid]`, then the right half `[mid..high]` must be sorted! Check if `nums[mid] < target && target <= nums[high]`—if yes, set `low = mid + 1`; otherwise set `high = mid - 1`."
+      ],
+      cppStarterTemplate: `int searchRotatedVault(const vector<int>& nums, int target) {
+    int low = 0, high = (int)nums.size() - 1;
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        if (nums[mid] == target) return mid;
+
+        // Check if the LEFT half [low..mid] is sorted:
+        if (nums[low] <= nums[mid]) {
+            // Complete the range check for the sorted left half:
+            if (nums[low] <= target && target < nums[mid]) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        } else {
+            // Otherwise the RIGHT half [mid..high] is sorted:
+            if (nums[mid] < target && target <= nums[high]) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+    }
+    return -1;
+}`,
+      quizQuestion:
+        "To verify your logic before running the test suite: when `nums[low] <= nums[mid]` is true (meaning the left half is sorted), under what exact condition do we move `high = mid - 1` to search the left half?",
+      quizOptions: [
+        {
+          id: "correct",
+          text: "nums[low] <= target && target < nums[mid] (Target lies within the sorted left half bounds)"
+        },
+        {
+          id: "wrong1",
+          text: "target < nums[mid] (Ignoring whether target is smaller than nums[low])"
+        },
+        {
+          id: "wrong2",
+          text: "nums[mid] < target && target <= nums[high] (Checking the right half instead)"
+        }
+      ],
+      solutionWalkthrough:
+        "Why this works in O(log n): In any rotated sorted array with distinct values, cutting at `mid` divides the array into two halves where at least one half does NOT contain the rotation pivot. By testing `nums[low] <= nums[mid]`, we identify the unbroken sorted half in O(1) time, check if `target` falls between its endpoints, and eliminate half of the remaining elements on every single loop iteration!"
+    },
+    warmup: {
+      id: "cotd-second-largest",
+      badge: "CHALLENGE OF THE DAY // BEGINNER WARMUP",
+      title: "Twin Beacons (Second Largest Element in a Single O(n) Pass)",
+      xpReward: 150,
+      timeComplexity: "O(n)",
+      spaceComplexity: "O(1)",
+      story:
+        "Sorting an array to find the second-largest power reading takes `O(n log n)` time. Can you track both the `firstMax` and `secondMax` distinct values in a single `O(n)` pass through the array?",
+      problemStatement:
+        "Given an array of integers `nums`, return the second largest distinct integer in a single loop, or `-1` if no second largest distinct integer exists.",
+      testCases: [
+        {
+          id: 1,
+          inputLabel: "nums = [12, 35, 1, 10, 34, 1]",
+          nums: [12, 35, 1, 10, 34, 1],
+          target: null,
+          expected: 34,
+          traceNote: "firstMax becomes 35, then 34 is smaller than 35 but larger than 12 -> secondMax = 34!"
+        },
+        {
+          id: 2,
+          inputLabel: "nums = [10, 5, 10] (Duplicate maximums)",
+          nums: [10, 5, 10],
+          target: null,
+          expected: 5,
+          traceNote: "Second 10 is ignored because we want distinct values -> secondMax = 5!"
+        },
+        {
+          id: 3,
+          inputLabel: "nums = [7, 7, 7] (All identical)",
+          nums: [7, 7, 7],
+          target: null,
+          expected: -1,
+          traceNote: "secondMax never updates -> returns -1."
+        }
+      ],
+      hints: [
+        "Hint 1: Maintain two variables `firstMax = -1` and `secondMax = -1`.",
+        "Hint 2: Whenever you see `x > firstMax`, don't overwrite `firstMax` right away! First demote the old champion: `secondMax = firstMax; firstMax = x;`.",
+        "Hint 3: What if `x` is smaller than `firstMax`, but larger than `secondMax`? Use `else if (x < firstMax && x > secondMax) secondMax = x;`."
+      ],
+      cppStarterTemplate: `int secondLargestDistinct(const vector<int>& nums) {
+    int firstMax = -1, secondMax = -1;
+    for (int x : nums) {
+        if (x > firstMax) {
+            secondMax = firstMax; // Old champion becomes #2!
+            firstMax = x;
+        } else if (x < firstMax && x > secondMax) {
+            secondMax = x;
+        }
+    }
+    return secondMax;
+}`,
+      quizQuestion:
+        "When iterating through `nums`, if we encounter a new value `x > firstMax`, what must we do BEFORE setting `firstMax = x`?",
+      quizOptions: [
+        {
+          id: "correct",
+          text: "Save the previous champion into secondMax: secondMax = firstMax;"
+        },
+        {
+          id: "wrong1",
+          text: "Reset secondMax = -1;"
+        },
+        {
+          id: "wrong2",
+          text: "Sort the vector from index 0 to i"
+        }
+      ],
+      solutionWalkthrough:
+        "By demoting `firstMax` into `secondMax` whenever a new record `x > firstMax` arrives—and also checking `x < firstMax && x > secondMax` for runner-up candidates—we find the exact answer in one `O(n)` scan using only two `int` variables (`O(1)` extra space)."
+    }
+  },
+
+  // 8 Achievements / Badges
+  achievements: [
+    {
+      id: "ach-first-quest",
+      title: "First Blood in Memory",
+      description: "Complete your first Sector on the C++ & DSA Quest Map.",
+      icon: "⚡",
+      xpBonus: 25
+    },
+    {
+      id: "ach-visualizer-run",
+      title: "Divide & Conquer",
+      description: "Run or step through an algorithm in the Interactive Visualizer Playground.",
+      icon: "🔭",
+      xpBonus: 25
+    },
+    {
+      id: "ach-custom-array",
+      title: "Architect of Inputs",
+      description: "Test your own custom array or edge-case target in the Algorithm Visualizer.",
+      icon: "🧪",
+      xpBonus: 35
+    },
+    {
+      id: "ach-daily-micro",
+      title: "Syntax Sharpener",
+      description: "Solve at least 3 Daily Coding Micro-Quests.",
+      icon: "🎯",
+      xpBonus: 50
+    },
+    {
+      id: "ach-boss-clear",
+      title: "Vault Breaker",
+      description: "Pass all test cases on the Challenge of the Day.",
+      icon: "🏆",
+      xpBonus: 75
+    },
+    {
+      id: "ach-xp-500",
+      title: "Memory Architect",
+      description: "Reach 500+ Total XP in the Academy.",
+      icon: "🛡️",
+      xpBonus: 50
+    },
+    {
+      id: "ach-half-map",
+      title: "Halving Protocol Master",
+      description: "Complete 4 or more Sectors on the Quest Map.",
+      icon: "💠",
+      xpBonus: 60
+    },
+    {
+      id: "ach-xp-1000",
+      title: "Grandmaster of O(1)",
+      description: "Reach 1,000+ Total XP across quests and challenges.",
+      icon: "👑",
+      xpBonus: 100
+    }
+  ],
+
+  // Example Community Leaderboard (Explicitly labeled as Demo Data in UI)
+  demoLeaderboard: [
+    {
+      id: "demo-1",
+      name: "Aarav_CPP (Demo Peer)",
+      rankTitle: "Grandmaster of O(1)",
+      xp: 1420,
+      streak: 14,
+      questsDone: 8,
+      favoriteTopic: "Binary Search & Trees",
+      isDemo: true
+    },
+    {
+      id: "demo-2",
+      name: "Meera_Vectors (Demo Peer)",
+      rankTitle: "Algorithm Knight",
+      xp: 980,
+      streak: 9,
+      questsDone: 6,
+      favoriteTopic: "Two Pointers",
+      isDemo: true
+    },
+    {
+      id: "demo-3",
+      name: "Rohan_Bitwise (Demo Peer)",
+      rankTitle: "Pointer Vanguard",
+      xp: 680,
+      streak: 6,
+      questsDone: 5,
+      favoriteTopic: "Linked Lists",
+      isDemo: true
+    },
+    {
+      id: "demo-4",
+      name: "Zoya_STL (Demo Peer)",
+      rankTitle: "Memory Architect",
+      xp: 410,
+      streak: 4,
+      questsDone: 3,
+      favoriteTopic: "std::vector & Sorting",
+      isDemo: true
+    },
+    {
+      id: "demo-5",
+      name: "Kabir_Loops (Demo Peer)",
+      rankTitle: "Syntax Ranger",
+      xp: 190,
+      streak: 2,
+      questsDone: 2,
+      favoriteTopic: "Control Flow",
+      isDemo: true
+    }
+  ]
+};
+
+
+/* ==========================================================================
+   DSA QUEST // Cybernetic C++ & Algorithms Academy
+   File: visualizer.js
+   Beginner Note: Instead of using tricky async timers that are hard to pause
+   or rewind, we pre-compute an array of "frames" (steps) by running the real
+   algorithm on your input array. Then Play, Pause, Step Forward, and Step Back
+   simply move an index (`currentStepIndex`) through those recorded frames!
+   ========================================================================== */
+
+window.DSAVisualizer = (function () {
+  let currentAlgo = "binary"; // 'binary' | 'selection' | 'twopointer'
+  let steps = [];
+  let currentStepIndex = 0;
+  let playTimer = null;
+  let isPlaying = false;
+  let speedMs = 1100; // Default step interval in milliseconds
+
+  // Authentic C++ implementations with 1-based line numbers for synchronized highlighting
+  const cppImplementations = {
+    binary: [
+      { line: 1, code: "int binarySearch(const vector<int>& arr, int target) {" },
+      { line: 2, code: "    int low = 0, high = (int)arr.size() - 1;" },
+      { line: 3, code: "    while (low <= high) {" },
+      { line: 4, code: "        int mid = low + (high - low) / 2;" },
+      { line: 5, code: "        if (arr[mid] == target)" },
+      { line: 6, code: "            return mid; // Target locked!" },
+      { line: 7, code: "        else if (arr[mid] < target)" },
+      { line: 8, code: "            low = mid + 1; // Eliminate left half" },
+      { line: 9, code: "        else" },
+      { line: 10, code: "            high = mid - 1; // Eliminate right half" },
+      { line: 11, code: "    }" },
+      { line: 12, code: "    return -1; // Target not present" },
+      { line: 13, code: "}" }
+    ],
+    selection: [
+      { line: 1, code: "void selectionSort(vector<int>& arr) {" },
+      { line: 2, code: "    int n = (int)arr.size();" },
+      { line: 3, code: "    for (int i = 0; i < n - 1; i++) {" },
+      { line: 4, code: "        int minIdx = i;" },
+      { line: 5, code: "        for (int j = i + 1; j < n; j++) {" },
+      { line: 6, code: "            if (arr[j] < arr[minIdx])" },
+      { line: 7, code: "                minIdx = j; // New minimum found" },
+      { line: 8, code: "        }" },
+      { line: 9, code: "        swap(arr[i], arr[minIdx]); // Lock minimum in place" },
+      { line: 10, code: "    }" },
+      { line: 11, code: "}" }
+    ],
+    twopointer: [
+      { line: 1, code: "pair<int,int> twoSumSorted(const vector<int>& arr, int target) {" },
+      { line: 2, code: "    int left = 0, right = (int)arr.size() - 1;" },
+      { line: 3, code: "    while (left < right) {" },
+      { line: 4, code: "        int sum = arr[left] + arr[right];" },
+      { line: 5, code: "        if (sum == target)" },
+      { line: 6, code: "            return {left, right}; // Pair found!" },
+      { line: 7, code: "        else if (sum < target)" },
+      { line: 8, code: "            left++;  // Need a larger sum -> move left right" },
+      { line: 9, code: "        else" },
+      { line: 10, code: "            right--; // Need a smaller sum -> move right left" },
+      { line: 11, code: "    }" },
+      { line: 12, code: "    return {-1, -1}; // No pair sums to target" },
+      { line: 13, code: "}" }
+    ]
+  };
+
+  // Presets so learners can test interesting scenarios with one click
+  const presets = {
+    binary: [
+      { name: "Standard Match (38)", array: "4, 11, 17, 23, 31, 38, 44, 52, 67, 85", target: "38" },
+      { name: "First Element Edge (4)", array: "4, 11, 17, 23, 31, 38, 44, 52, 67, 85", target: "4" },
+      { name: "Not Found Case (50)", array: "4, 11, 17, 23, 31, 38, 44, 52, 67, 85", target: "50" },
+      { name: "12-Element Deep Halving (91)", array: "3, 9, 14, 22, 29, 36, 48, 55, 64, 73, 82, 91", target: "91" }
+    ],
+    selection: [
+      { name: "Unsorted 6 Elements", array: "42, 15, 68, 9, 31, 24", target: "" },
+      { name: "Reverse Sorted (Worst Case)", array: "60, 50, 40, 30, 20, 10", target: "" },
+      { name: "Nearly Sorted", array: "12, 18, 15, 29, 44, 37", target: "" }
+    ],
+    twopointer: [
+      { name: "Pair Exists (Sum = 55)", array: "5, 12, 19, 24, 31, 40, 48", target: "55" },
+      { name: "Outer Ends (Sum = 53)", array: "5, 12, 19, 24, 31, 40, 48", target: "53" },
+      { name: "No Matching Pair (Sum = 30)", array: "5, 12, 19, 24, 31, 40, 48", target: "30" }
+    ]
+  };
+
+  // Generate exact frames for Binary Search
+  function generateBinarySearchSteps(arr, target) {
+    const frames = [];
+    const n = arr.length;
+    let low = 0;
+    let high = n - 1;
+    let comparisons = 0;
+
+    frames.push({
+      arr: [...arr],
+      low,
+      high,
+      mid: null,
+      foundIndex: null,
+      comparisons: 0,
+      activeRangeCount: n,
+      cppLine: 2,
+      phaseBadge: "INITIALIZE",
+      explanation: `Initialized search boundaries: low = 0 (value ${arr[0]}) and high = ${n - 1} (value ${arr[n - 1]}). All ${n} elements are currently inside our active search window.`
+    });
+
+    while (low <= high) {
+      const mid = low + Math.floor((high - low) / 2);
+      const activeCount = high - low + 1;
+
+      frames.push({
+        arr: [...arr],
+        low,
+        high,
+        mid,
+        foundIndex: null,
+        comparisons,
+        activeRangeCount: activeCount,
+        cppLine: 4,
+        phaseBadge: "COMPUTE MID",
+        explanation: `low (${low}) <= high (${high}) is true. Computed midpoint: mid = ${low} + (${high} - ${low}) / 2 = ${mid}. Inspecting arr[${mid}] = ${arr[mid]}.`
+      });
+
+      comparisons++;
+
+      if (arr[mid] === target) {
+        frames.push({
+          arr: [...arr],
+          low,
+          high,
+          mid,
+          foundIndex: mid,
+          comparisons,
+          activeRangeCount: 1,
+          cppLine: 6,
+          phaseBadge: "TARGET LOCKED",
+          explanation: `Match confirmed! arr[${mid}] (${arr[mid]}) == target (${target}). Binary Search found the target at index ${mid} in just ${comparisons} comparison(s) (vs ${mid + 1} for Linear Search)!`
+        });
+        return frames;
+      } else if (arr[mid] < target) {
+        const eliminatedCount = mid - low + 1;
+        frames.push({
+          arr: [...arr],
+          low,
+          high,
+          mid,
+          foundIndex: null,
+          comparisons,
+          activeRangeCount: activeCount,
+          cppLine: 8,
+          phaseBadge: "ELIMINATE LEFT HALF",
+          explanation: `Since arr[${mid}] (${arr[mid]}) < target (${target}) and the array is sorted, every element at or to the left of index ${mid} is also too small! We eliminate ${eliminatedCount} element(s) and set low = mid + 1 = ${mid + 1}.`
+        });
+        low = mid + 1;
+      } else {
+        const eliminatedCount = high - mid + 1;
+        frames.push({
+          arr: [...arr],
+          low,
+          high,
+          mid,
+          foundIndex: null,
+          comparisons,
+          activeRangeCount: activeCount,
+          cppLine: 10,
+          phaseBadge: "ELIMINATE RIGHT HALF",
+          explanation: `Since arr[${mid}] (${arr[mid]}) > target (${target}) and the array is sorted, every element at or to the right of index ${mid} is also too large! We eliminate ${eliminatedCount} element(s) and set high = mid - 1 = ${mid - 1}.`
+        });
+        high = mid - 1;
+      }
+    }
+
+    frames.push({
+      arr: [...arr],
+      low,
+      high,
+      mid: null,
+      foundIndex: -1,
+      comparisons,
+      activeRangeCount: 0,
+      cppLine: 12,
+      phaseBadge: "NOT FOUND (-1)",
+      explanation: `Search loop ended because low (${low}) > high (${high}). Active search window is now empty (0 elements left). Target ${target} does not exist in the array, returning -1 after ${comparisons} comparisons.`
+    });
+
+    return frames;
+  }
+
+  // Generate exact frames for Selection Sort
+  function generateSelectionSortSteps(inputArr) {
+    const arr = [...inputArr];
+    const n = arr.length;
+    const frames = [];
+    let comparisons = 0;
+
+    frames.push({
+      arr: [...arr],
+      i: 0,
+      j: null,
+      minIdx: 0,
+      sortedCount: 0,
+      swappedPair: null,
+      comparisons: 0,
+      activeRangeCount: n,
+      cppLine: 2,
+      phaseBadge: "START SORT",
+      explanation: `Starting Selection Sort on ${n} elements. In each pass i, we scan the unsorted region [i..${n - 1}] to locate the smallest value and swap it into index i.`
+    });
+
+    for (let i = 0; i < n - 1; i++) {
+      let minIdx = i;
+      frames.push({
+        arr: [...arr],
+        i,
+        j: null,
+        minIdx,
+        sortedCount: i,
+        swappedPair: null,
+        comparisons,
+        activeRangeCount: n - i,
+        cppLine: 4,
+        phaseBadge: `PASS ${i + 1}`,
+        explanation: `Pass ${i + 1}: Assume initial minimum for this pass is at index i = ${i} (arr[${i}] = ${arr[i]}).`
+      });
+
+      for (let j = i + 1; j < n; j++) {
+        comparisons++;
+        const isSmaller = arr[j] < arr[minIdx];
+        if (isSmaller) {
+          const oldMin = arr[minIdx];
+          minIdx = j;
+          frames.push({
+            arr: [...arr],
+            i,
+            j,
+            minIdx,
+            sortedCount: i,
+            swappedPair: null,
+            comparisons,
+            activeRangeCount: n - i,
+            cppLine: 7,
+            phaseBadge: "NEW MINIMUM",
+            explanation: `Compared arr[${j}] (${arr[j]}) < current minimum (${oldMin}). Updated minIdx = ${j} (value ${arr[j]}).`
+          });
+        } else {
+          frames.push({
+            arr: [...arr],
+            i,
+            j,
+            minIdx,
+            sortedCount: i,
+            swappedPair: null,
+            comparisons,
+            activeRangeCount: n - i,
+            cppLine: 6,
+            phaseBadge: "SCANNING",
+            explanation: `Compared arr[${j}] (${arr[j]}) with arr[minIdx] (${arr[minIdx]}). Not smaller, so minIdx stays at ${minIdx}.`
+          });
+        }
+      }
+
+      const temp = arr[i];
+      arr[i] = arr[minIdx];
+      arr[minIdx] = temp;
+
+      frames.push({
+        arr: [...arr],
+        i,
+        j: null,
+        minIdx,
+        sortedCount: i + 1,
+        swappedPair: [i, minIdx],
+        comparisons,
+        activeRangeCount: n - i - 1,
+        cppLine: 9,
+        phaseBadge: "SWAP & LOCK",
+        explanation:
+          i === minIdx
+            ? `arr[${i}] (${arr[i]}) was already the minimum of the remaining elements. Locked index ${i} in final sorted position!`
+            : `Swapped arr[${i}] (${temp}) with minimum arr[${minIdx}] (${arr[i]}). Index ${i} is now permanently sorted!`
+      });
+    }
+
+    frames.push({
+      arr: [...arr],
+      i: n - 1,
+      j: null,
+      minIdx: n - 1,
+      sortedCount: n,
+      swappedPair: null,
+      comparisons,
+      activeRangeCount: 0,
+      cppLine: 11,
+      phaseBadge: "SORT COMPLETE",
+      explanation: `Selection Sort complete! All ${n} elements are in ascending order after ${comparisons} total comparisons.`
+    });
+
+    return frames;
+  }
+
+  // Generate exact frames for Two-Pointer Sorted Target Sum
+  function generateTwoPointerSteps(arr, target) {
+    const frames = [];
+    const n = arr.length;
+    let left = 0;
+    let right = n - 1;
+    let comparisons = 0;
+
+    frames.push({
+      arr: [...arr],
+      low: left,
+      high: right,
+      mid: null,
+      foundPair: null,
+      comparisons: 0,
+      activeRangeCount: n,
+      cppLine: 2,
+      phaseBadge: "INIT POINTERS",
+      explanation: `Placed left pointer at index 0 (${arr[0]}) and right pointer at index ${n - 1} (${arr[n - 1]}). Goal: find two elements that sum to ${target} in O(n) time.`
+    });
+
+    while (left < right) {
+      const sum = arr[left] + arr[right];
+      comparisons++;
+
+      frames.push({
+        arr: [...arr],
+        low: left,
+        high: right,
+        mid: null,
+        foundPair: null,
+        comparisons,
+        activeRangeCount: right - left + 1,
+        cppLine: 4,
+        phaseBadge: `SUM = ${sum}`,
+        explanation: `Computed sum = arr[${left}] (${arr[left]}) + arr[${right}] (${arr[right]}) = ${sum}. Comparing ${sum} against target ${target}.`
+      });
+
+      if (sum === target) {
+        frames.push({
+          arr: [...arr],
+          low: left,
+          high: right,
+          mid: null,
+          foundPair: [left, right],
+          comparisons,
+          activeRangeCount: 2,
+          cppLine: 6,
+          phaseBadge: "PAIR LOCKED",
+          explanation: `Target sum matched! arr[${left}] (${arr[left]}) + arr[${right}] (${arr[right]}) == ${target}. Found in ${comparisons} steps without nested O(n²) loops!`
+        });
+        return frames;
+      } else if (sum < target) {
+        frames.push({
+          arr: [...arr],
+          low: left,
+          high: right,
+          mid: null,
+          foundPair: null,
+          comparisons,
+          activeRangeCount: right - left,
+          cppLine: 8,
+          phaseBadge: "MOVE LEFT++",
+          explanation: `Sum (${sum}) < target (${target}). Because the array is sorted, we need a larger number, so we increment left++ from ${left} to ${left + 1}.`
+        });
+        left++;
+      } else {
+        frames.push({
+          arr: [...arr],
+          low: left,
+          high: right,
+          mid: null,
+          foundPair: null,
+          comparisons,
+          activeRangeCount: right - left,
+          cppLine: 10,
+          phaseBadge: "MOVE RIGHT--",
+          explanation: `Sum (${sum}) > target (${target}). Because the array is sorted, we need a smaller number, so we decrement right-- from ${right} to ${right - 1}.`
+        });
+        right--;
+      }
+    }
+
+    frames.push({
+      arr: [...arr],
+      low: left,
+      high: right,
+      mid: null,
+      foundPair: [-1, -1],
+      comparisons,
+      activeRangeCount: 0,
+      cppLine: 12,
+      phaseBadge: "NO PAIR FOUND",
+      explanation: `Pointers met at index ${left} (left >= right). Confirmed in ${comparisons} comparisons that no two elements sum to ${target}.`
+    });
+
+    return frames;
+  }
+
+  function stopPlayback() {
+    if (playTimer) {
+      clearInterval(playTimer);
+      playTimer = null;
+    }
+    isPlaying = false;
+    updatePlayButtonUI();
+  }
+
+  function updatePlayButtonUI() {
+    const playBtn = document.getElementById("viz-play-btn");
+    if (!playBtn) return;
+    if (isPlaying) {
+      playBtn.innerHTML = `<span>⏸ Pause</span>`;
+      playBtn.classList.add("border-amber-400", "text-amber-300");
+    } else {
+      playBtn.innerHTML = `<span>▶ Play Auto</span>`;
+      playBtn.classList.remove("border-amber-400", "text-amber-300");
+    }
+  }
+
+  function parseAndValidateInputs(autoSortIfUnsorted) {
+    const rawArrInput = document.getElementById("viz-array-input");
+    const rawTargetInput = document.getElementById("viz-target-input");
+    const errorBanner = document.getElementById("viz-validation-banner");
+
+    if (!rawArrInput) return null;
+    if (errorBanner) {
+      errorBanner.classList.add("hidden");
+      errorBanner.innerHTML = "";
+    }
+
+    const parts = rawArrInput.value
+      .split(",")
+      .map((s) => s.trim())
+      .filter((s) => s.length > 0);
+
+    if (parts.length < 2 || parts.length > 16) {
+      showValidationBanner(
+        "Please enter between 2 and 16 comma-separated integers (for example: 4, 11, 17, 23, 38, 52).",
+        false
+      );
+      return null;
+    }
+
+    const nums = [];
+    for (let i = 0; i < parts.length; i++) {
+      const val = Number(parts[i]);
+      if (!Number.isInteger(val) || val < -999 || val > 9999) {
+        showValidationBanner(
+          `Invalid value "${parts[i]}". Please enter whole integers between -999 and 9999.`,
+          false
+        );
+        return null;
+      }
+      nums.push(val);
+    }
+
+    // Check sorted requirement for Binary Search and Two-Pointer
+    if (currentAlgo === "binary" || currentAlgo === "twopointer") {
+      let isSorted = true;
+      for (let i = 1; i < nums.length; i++) {
+        if (nums[i] < nums[i - 1]) {
+          isSorted = false;
+          break;
+        }
+      }
+
+      if (!isSorted) {
+        if (autoSortIfUnsorted) {
+          nums.sort((a, b) => a - b);
+          rawArrInput.value = nums.join(", ");
+        } else {
+          showValidationBanner(
+            `Heads up! ${
+              currentAlgo === "binary" ? "Binary Search" : "Sorted Two-Pointer Search"
+            } requires a sorted array so it knows which direction to eliminate.`,
+            true
+          );
+          return null;
+        }
+      }
+    }
+
+    let target = 0;
+    if (currentAlgo === "binary" || currentAlgo === "twopointer") {
+      const targetStr = rawTargetInput ? rawTargetInput.value.trim() : "";
+      const parsedTarget = Number(targetStr);
+      if (targetStr === "" || !Number.isInteger(parsedTarget)) {
+        showValidationBanner("Please enter a valid integer for the Target value.", false);
+        return null;
+      }
+      target = parsedTarget;
+    }
+
+    return { nums, target };
+  }
+
+  function showValidationBanner(message, showAutoSortBtn) {
+    const errorBanner = document.getElementById("viz-validation-banner");
+    if (!errorBanner) return;
+    errorBanner.classList.remove("hidden");
+    errorBanner.innerHTML = `
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div class="flex items-start gap-2.5">
+          <span class="text-amber-400 font-bold text-base">⚠️</span>
+          <p class="text-xs sm:text-sm text-amber-200">${message}</p>
+        </div>
+        ${
+          showAutoSortBtn
+            ? `<button type="button" onclick="window.DSAVisualizer.sortAndLoad()" class="px-3 py-1.5 rounded-lg bg-cyan-500/20 border border-cyan-400 text-cyan-200 text-xs font-semibold hover:bg-cyan-500/30 transition shrink-0">
+                 ✨ Auto-Sort Array & Run
+               </button>`
+            : ""
+        }
+      </div>
+    `;
+  }
+
+  function renderCodePanel(activeLineNumber) {
+    const container = document.getElementById("viz-cpp-code");
+    if (!container) return;
+    const lines = cppImplementations[currentAlgo] || [];
+    container.innerHTML = lines
+      .map((item) => {
+        const isActive = item.line === activeLineNumber;
+        const escaped = item.code
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;");
+        return `
+          <div class="cpp-code-line ${isActive ? "active-line" : "text-slate-400"}">
+            <span class="w-7 text-right pr-3 text-slate-600 select-none text-xs">${item.line}</span>
+            <pre class="m-0 font-mono-code text-xs sm:text-sm whitespace-pre overflow-x-auto">${escaped}</pre>
+          </div>
+        `;
+      })
+      .join("");
+  }
+
+  function renderCurrentFrame() {
+    if (!steps.length) return;
+    const frame = steps[currentStepIndex];
+    const arrayStage = document.getElementById("viz-array-stage");
+    const stepExplanation = document.getElementById("viz-step-explanation");
+    const phaseBadge = document.getElementById("viz-phase-badge");
+    const stepCounter = document.getElementById("viz-step-counter");
+    const metricActive = document.getElementById("viz-metric-active");
+    const metricComparisons = document.getElementById("viz-metric-comparisons");
+    const metricComplexity = document.getElementById("viz-metric-complexity");
+
+    if (phaseBadge) phaseBadge.textContent = frame.phaseBadge;
+    if (stepCounter) stepCounter.textContent = `Step ${currentStepIndex + 1} of ${steps.length}`;
+    if (stepExplanation) stepExplanation.textContent = frame.explanation;
+    if (metricActive) metricActive.textContent = `${frame.activeRangeCount} / ${frame.arr.length}`;
+    if (metricComparisons) metricComparisons.textContent = `${frame.comparisons}`;
+    if (metricComplexity) {
+      if (currentAlgo === "binary") {
+        const maxSteps = Math.floor(Math.log2(frame.arr.length)) + 1;
+        metricComplexity.textContent = `O(log n) · Max ${maxSteps} steps`;
+      } else if (currentAlgo === "selection") {
+        metricComplexity.textContent = `O(n²) · In-Place`;
+      } else {
+        metricComplexity.textContent = `O(n) · Two Pointers`;
+      }
+    }
+
+    // Render array visual cells with pointer tags
+    if (arrayStage) {
+      arrayStage.innerHTML = frame.arr
+        .map((val, idx) => {
+          let stateClass = "state-active";
+          const badges = [];
+
+          if (currentAlgo === "binary") {
+            const isEliminated =
+              frame.foundIndex === -1 ||
+              idx < frame.low ||
+              idx > frame.high ||
+              (frame.foundIndex !== null && frame.foundIndex >= 0 && idx !== frame.foundIndex);
+
+            if (frame.foundIndex === idx) {
+              stateClass = "state-found";
+              badges.push({ text: "FOUND", cls: "bg-emerald-500 text-slate-950" });
+            } else if (frame.mid === idx) {
+              stateClass = "state-mid";
+              badges.push({ text: "MID", cls: "bg-amber-400 text-slate-950" });
+            } else if (isEliminated) {
+              stateClass = "state-eliminated";
+            }
+
+            if (idx === frame.low && frame.low <= frame.high) {
+              badges.push({ text: "LOW", cls: "bg-cyan-400 text-slate-950" });
+            }
+            if (idx === frame.high && frame.low <= frame.high) {
+              badges.push({ text: "HIGH", cls: "bg-violet-400 text-slate-950" });
+            }
+          } else if (currentAlgo === "selection") {
+            if (idx < frame.sortedCount) {
+              stateClass = "state-found";
+              badges.push({ text: "SORTED", cls: "bg-emerald-500 text-slate-950" });
+            } else if (frame.swappedPair && frame.swappedPair.includes(idx)) {
+              stateClass = "state-swap";
+              badges.push({ text: "SWAPPED", cls: "bg-purple-400 text-slate-950" });
+            } else if (idx === frame.minIdx) {
+              stateClass = "state-mid";
+              badges.push({ text: "MIN", cls: "bg-amber-400 text-slate-950" });
+            } else if (idx === frame.j) {
+              stateClass = "state-compare";
+              badges.push({ text: "SCAN j", cls: "bg-cyan-400 text-slate-950" });
+            }
+            if (idx === frame.i && frame.sortedCount < frame.arr.length) {
+              badges.push({ text: "i", cls: "bg-violet-400 text-slate-950" });
+            }
+          } else if (currentAlgo === "twopointer") {
+            const isEliminated =
+              (frame.foundPair && frame.foundPair[0] === -1) ||
+              idx < frame.low ||
+              idx > frame.high;
+            if (frame.foundPair && (idx === frame.foundPair[0] || idx === frame.foundPair[1])) {
+              stateClass = "state-found";
+              badges.push({ text: "MATCH", cls: "bg-emerald-500 text-slate-950" });
+            } else if (idx === frame.low || idx === frame.high) {
+              stateClass = "state-compare";
+            } else if (isEliminated) {
+              stateClass = "state-eliminated";
+            }
+
+            if (idx === frame.low && frame.low < frame.arr.length) {
+              badges.push({ text: "LEFT", cls: "bg-cyan-400 text-slate-950" });
+            }
+            if (idx === frame.high && frame.high >= 0) {
+              badges.push({ text: "RIGHT", cls: "bg-violet-400 text-slate-950" });
+            }
+          }
+
+          const badgeHtml = badges
+            .map(
+              (b) =>
+                `<span class="px-1.5 py-0.5 rounded text-[10px] font-extrabold tracking-wider uppercase ${b.cls}">${b.text}</span>`
+            )
+            .join("");
+
+          return `
+            <div class="array-cell ${stateClass} rounded-xl border p-2.5 sm:p-3 min-w-[60px] sm:min-w-[72px] flex flex-col items-center justify-between select-none">
+              <div class="flex flex-wrap gap-1 justify-center min-h-[20px] mb-1">
+                ${badgeHtml}
+              </div>
+              <div class="text-lg sm:text-2xl font-extrabold font-mono-code text-white my-1">
+                ${val}
+              </div>
+              <div class="text-[11px] font-mono-code text-slate-400 border-t border-slate-800/80 w-full text-center pt-1 mt-1">
+                [${idx}]
+              </div>
+            </div>
+          `;
+        })
+        .join("");
+    }
+
+    renderCodePanel(frame.cppLine);
+  }
+
+  function renderPresets() {
+    const presetContainer = document.getElementById("viz-presets-bar");
+    if (!presetContainer) return;
+    const list = presets[currentAlgo] || [];
+    presetContainer.innerHTML = list
+      .map(
+        (p, idx) => `
+        <button type="button" onclick="window.DSAVisualizer.applyPreset(${idx})"
+          class="px-2.5 py-1 rounded-lg bg-slate-800/90 hover:bg-cyan-500/20 border border-slate-700 hover:border-cyan-400/60 text-xs text-slate-300 hover:text-cyan-200 transition">
+          ${p.name}
+        </button>
+      `
+      )
+      .join("");
+  }
+
+  function loadCustomInputs(autoSortIfUnsorted = false, isUserCustomAction = false) {
+    stopPlayback();
+    const parsed = parseAndValidateInputs(autoSortIfUnsorted);
+    if (!parsed) return;
+
+    const { nums, target } = parsed;
+    if (currentAlgo === "binary") {
+      steps = generateBinarySearchSteps(nums, target);
+    } else if (currentAlgo === "selection") {
+      steps = generateSelectionSortSteps(nums);
+    } else {
+      steps = generateTwoPointerSteps(nums, target);
+    }
+
+    currentStepIndex = 0;
+    renderCurrentFrame();
+
+    if (isUserCustomAction && window.DSAQuestApp) {
+      window.DSAQuestApp.unlockAchievement("ach-custom-array");
+      window.DSAQuestApp.playTone("step");
+    }
+  }
+
+  function switchAlgorithm(algoKey) {
+    stopPlayback();
+    currentAlgo = algoKey;
+
+    ["binary", "selection", "twopointer"].forEach((k) => {
+      const btn = document.getElementById(`viz-algo-btn-${k}`);
+      if (btn) {
+        if (k === algoKey) {
+          btn.className =
+            "px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-400/60 transition";
+        } else {
+          btn.className =
+            "px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-900/70 text-slate-400 border border-slate-800 hover:text-slate-200 transition";
+        }
+      }
+    });
+
+    const targetWrapper = document.getElementById("viz-target-wrapper");
+    const targetLabel = document.getElementById("viz-target-label");
+    if (targetWrapper) {
+      if (algoKey === "selection") {
+        targetWrapper.classList.add("hidden");
+      } else {
+        targetWrapper.classList.remove("hidden");
+        if (targetLabel) {
+          targetLabel.textContent =
+            algoKey === "binary" ? "Search Target Value" : "Target Pair Sum";
+        }
+      }
+    }
+
+    renderPresets();
+    applyPreset(0);
+  }
+
+  function applyPreset(presetIdx) {
+    const list = presets[currentAlgo] || [];
+    const chosen = list[presetIdx] || list[0];
+    if (!chosen) return;
+    const arrInput = document.getElementById("viz-array-input");
+    const targetInput = document.getElementById("viz-target-input");
+    if (arrInput) arrInput.value = chosen.array;
+    if (targetInput) targetInput.value = chosen.target;
+    loadCustomInputs(true, false);
+  }
+
+  function stepForward() {
+    if (!steps.length) return;
+    if (window.DSAQuestApp) {
+      window.DSAQuestApp.unlockAchievement("ach-visualizer-run");
+    }
+    if (currentStepIndex < steps.length - 1) {
+      currentStepIndex++;
+      renderCurrentFrame();
+      if (window.DSAQuestApp) window.DSAQuestApp.playTone("step");
+    } else {
+      stopPlayback();
+    }
+  }
+
+  function stepBackward() {
+    stopPlayback();
+    if (!steps.length) return;
+    if (currentStepIndex > 0) {
+      currentStepIndex--;
+      renderCurrentFrame();
+      if (window.DSAQuestApp) window.DSAQuestApp.playTone("step");
+    }
+  }
+
+  function togglePlay() {
+    if (!steps.length) return;
+    if (window.DSAQuestApp) {
+      window.DSAQuestApp.unlockAchievement("ach-visualizer-run");
+    }
+
+    if (isPlaying) {
+      stopPlayback();
+      return;
+    }
+
+    if (currentStepIndex >= steps.length - 1) {
+      currentStepIndex = 0;
+      renderCurrentFrame();
+    }
+
+    isPlaying = true;
+    updatePlayButtonUI();
+    playTimer = setInterval(() => {
+      if (currentStepIndex < steps.length - 1) {
+        currentStepIndex++;
+        renderCurrentFrame();
+        if (window.DSAQuestApp) window.DSAQuestApp.playTone("step");
+      } else {
+        stopPlayback();
+      }
+    }, speedMs);
+  }
+
+  function resetVisualizer() {
+    stopPlayback();
+    currentStepIndex = 0;
+    renderCurrentFrame();
+  }
+
+  function updateSpeed(val) {
+    // Slider value 1 (Slow 1600ms) to 5 (Fast 400ms)
+    const num = Number(val) || 3;
+    speedMs = 1900 - num * 300;
+    const speedLabel = document.getElementById("viz-speed-label");
+    const labels = { 1: "0.5x", 2: "0.75x", 3: "1.0x", 4: "1.5x", 5: "2.2x" };
+    if (speedLabel) speedLabel.textContent = labels[num] || "1.0x";
+    if (isPlaying) {
+      stopPlayback();
+      togglePlay();
+    }
+  }
+
+  function sortAndLoad() {
+    loadCustomInputs(true, true);
+  }
+
+  function init() {
+    renderPresets();
+    loadCustomInputs(true, false);
+  }
+
+  return {
+    init,
+    switchAlgorithm,
+    applyPreset,
+    loadCustomInputs,
+    sortAndLoad,
+    stepForward,
+    stepBackward,
+    togglePlay,
+    resetVisualizer,
+    updateSpeed
+  };
+})();
+
+
+/* ==========================================================================
+   DSA QUEST // Cybernetic C++ & Algorithms Academy
+   File: app.js
+   Beginner Note: This file manages player state (XP, level, completed quests,
+   streak, unlocked achievements), localStorage persistence, sound effects,
+   and all interactive modals and views.
+   ========================================================================== */
+
+window.DSAQuestApp = (function () {
+  const STORAGE_KEY = "dsa_quest_academy_state_v1";
+
+  // Default state for a brand-new adventurer
+  const defaultState = {
+    adventurerName: "CyberCadet",
+    xp: 120, // Starts with 120 XP from Academy Orientation
+    streakDays: 3,
+    completedQuests: [],
+    completedDailyQuests: [],
+    completedBossIds: [],
+    unlockedAchievements: [],
+    mentorUnlockAll: false,
+    soundEnabled: true,
+    activeTab: "home",
+    selectedDailyCategory: "All",
+    activeBossKey: "rotated"
+  };
+
+  let state = { ...defaultState };
+  let activeQuestModalId = null;
+  let activeQuestHintIndex = 0;
+  let activeBossHintCount = 0;
+  let audioCtx = null;
+
+  // Safe localStorage wrapper (required so private browsing or sandboxed iframes never crash)
+  function loadState() {
+    try {
+      const saved = window.localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        state = {
+          ...defaultState,
+          ...parsed,
+          completedQuests: Array.isArray(parsed.completedQuests) ? parsed.completedQuests : [],
+          completedDailyQuests: Array.isArray(parsed.completedDailyQuests)
+            ? parsed.completedDailyQuests
+            : [],
+          completedBossIds: Array.isArray(parsed.completedBossIds) ? parsed.completedBossIds : [],
+          unlockedAchievements: Array.isArray(parsed.unlockedAchievements)
+            ? parsed.unlockedAchievements
+            : []
+        };
+      }
+    } catch (err) {
+      // Fallback to in-memory state if localStorage is restricted
+      state = { ...defaultState };
+    }
+  }
+
+  function saveState() {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (err) {
+      // Ignore storage write errors in restricted iframe environments
+    }
+  }
+
+  // Synthesized Web Audio API tones (zero external audio files needed!)
+  function playTone(type) {
+    if (!state.soundEnabled) return;
+    try {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextClass) return;
+      if (!audioCtx) audioCtx = new AudioContextClass();
+      if (audioCtx.state === "suspended") audioCtx.resume();
+
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      const now = audioCtx.currentTime;
+      if (type === "success") {
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(523.25, now); // C5
+        osc.frequency.setValueAtTime(659.25, now + 0.08); // E5
+        osc.frequency.setValueAtTime(783.99, now + 0.16); // G5
+        gain.gain.setValueAtTime(0.08, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+        osc.start(now);
+        osc.stop(now + 0.35);
+      } else if (type === "step") {
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(440, now);
+        gain.gain.setValueAtTime(0.03, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+        osc.start(now);
+        osc.stop(now + 0.06);
+      } else if (type === "error") {
+        osc.type = "sawtooth";
+        osc.frequency.setValueAtTime(190, now);
+        gain.gain.setValueAtTime(0.06, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+        osc.start(now);
+        osc.stop(now + 0.22);
+      }
+    } catch (e) {
+      // Audio is optional enhancement
+    }
+  }
+
+  function toggleSound() {
+    state.soundEnabled = !state.soundEnabled;
+    saveState();
+    renderHeaderHUD();
+    showToast(
+      state.soundEnabled ? "🔊 Synth Audio Enabled" : "🔇 Synth Audio Muted",
+      state.soundEnabled
+        ? "Subtle Web Audio feedback is active for quests and visualizers."
+        : "Sound effects are now muted.",
+      "info"
+    );
+  }
+
+  // Compute current Adventurer Rank and progress to next rank
+  function getRankInfo(xpVal) {
+    const ranks = window.DSA_QUEST_DATA.ranks;
+    let current = ranks[0];
+    let next = null;
+
+    for (let i = 0; i < ranks.length; i++) {
+      if (xpVal >= ranks[i].minXp) {
+        current = ranks[i];
+        next = ranks[i + 1] || null;
+      }
+    }
+
+    let progressPct = 100;
+    let xpIntoLevel = xpVal - current.minXp;
+    let xpNeededForNext = 0;
+
+    if (next) {
+      const span = next.minXp - current.minXp;
+      xpNeededForNext = next.minXp - xpVal;
+      progressPct = Math.min(100, Math.max(4, Math.round((xpIntoLevel / span) * 100)));
+    }
+
+    return { current, next, progressPct, xpNeededForNext };
+  }
+
+  function addXp(amount, reasonLabel) {
+    const oldRank = getRankInfo(state.xp).current.level;
+    state.xp += amount;
+    const newRankInfo = getRankInfo(state.xp);
+    saveState();
+
+    showToast(`+${amount} XP Earned!`, reasonLabel, "xp");
+
+    if (newRankInfo.current.level > oldRank) {
+      showToast(
+        `🎉 RANK UP: ${newRankInfo.current.title}!`,
+        `You reached Level ${newRankInfo.current.level}! New sectors on the Quest Map are now unlocked.`,
+        "rank"
+      );
+    }
+
+    checkMilestoneAchievements();
+    renderAll();
+  }
+
+  function unlockAchievement(achId) {
+    if (state.unlockedAchievements.includes(achId)) return;
+    const ach = window.DSA_QUEST_DATA.achievements.find((a) => a.id === achId);
+    if (!ach) return;
+
+    state.unlockedAchievements.push(achId);
+    state.xp += ach.xpBonus;
+    saveState();
+
+    showToast(
+      `${ach.icon} Badge Unlocked: ${ach.title}`,
+      `${ach.description} (+${ach.xpBonus} Bonus XP)`,
+      "achievement"
+    );
+    renderAll();
+  }
+
+  function checkMilestoneAchievements() {
+    if (state.completedQuests.length >= 1) unlockAchievement("ach-first-quest");
+    if (state.completedQuests.length >= 4) unlockAchievement("ach-half-map");
+    if (state.completedDailyQuests.length >= 3) unlockAchievement("ach-daily-micro");
+    if (state.xp >= 500) unlockAchievement("ach-xp-500");
+    if (state.xp >= 1000) unlockAchievement("ach-xp-1000");
+  }
+
+  function showToast(title, message, variant = "info") {
+    const container = document.getElementById("toast-container");
+    if (!container) return;
+
+    const borderColors = {
+      xp: "border-cyan-400 bg-slate-900/95",
+      achievement: "border-amber-400 bg-slate-900/95",
+      rank: "border-violet-400 bg-slate-900/95",
+      info: "border-slate-600 bg-slate-900/95"
+    };
+
+    while (container.children.length >= 2) { container.firstElementChild.remove(); }
+    const toast = document.createElement("div");
+    toast.className = `pointer-events-auto cyber-card border-l-4 ${
+      borderColors[variant] || borderColors.info
+    } p-3.5 rounded-xl shadow-2xl max-w-sm transition-all duration-300 transform translate-y-0 opacity-100`;
+    toast.innerHTML = `
+      <div class="flex items-start justify-between gap-3">
+        <div>
+          <div class="text-xs font-bold uppercase tracking-wider text-cyan-300">${title}</div>
+          <div class="text-xs text-slate-300 mt-0.5">${message}</div>
+        </div>
+        <button type="button" class="text-slate-400 hover:text-white text-xs" onclick="this.parentElement.parentElement.remove()">✕</button>
+      </div>
+    `;
+
+    container.appendChild(toast);
+    setTimeout(() => {
+      if (toast && toast.parentElement) {
+        toast.style.opacity = "0";
+        setTimeout(() => toast.remove(), 250);
+      }
+    }, 4200);
+  }
+
+  // Navigation between main views
+  function switchTab(tabId) {
+    state.activeTab = tabId;
+    saveState();
+
+    const sections = ["home", "quests", "playground", "daily", "leaderboard", "dashboard"];
+    sections.forEach((sec) => {
+      const el = document.getElementById(`view-${sec}`);
+      const navBtn = document.getElementById(`nav-btn-${sec}`);
+      if (el) {
+        if (sec === tabId) el.classList.remove("hidden");
+        else el.classList.add("hidden");
+      }
+      if (navBtn) {
+        if (sec === tabId) navBtn.classList.add("active");
+        else navBtn.classList.remove("active");
+      }
+    });
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  // Header HUD Rendering
+  function renderHeaderHUD() {
+    const rankInfo = getRankInfo(state.xp);
+    const rankBadge = document.getElementById("hud-rank-badge");
+    const rankTitle = document.getElementById("hud-rank-title");
+    const xpText = document.getElementById("hud-xp-text");
+    const xpBar = document.getElementById("hud-xp-bar");
+    const streakEl = document.getElementById("hud-streak");
+    const soundBtn = document.getElementById("hud-sound-btn");
+
+    if (rankBadge) rankBadge.textContent = `LVL ${rankInfo.current.level}`;
+    if (rankTitle) rankTitle.textContent = rankInfo.current.title;
+    if (xpText) {
+      xpText.textContent = rankInfo.next
+        ? `${state.xp} / ${rankInfo.next.minXp} XP`
+        : `${state.xp} XP (MAX)`;
+    }
+    if (xpBar) xpBar.style.width = `${rankInfo.progressPct}%`;
+    if (streakEl) streakEl.textContent = `${state.streakDays}d Streak`;
+    if (soundBtn) {
+      soundBtn.innerHTML = state.soundEnabled ? "🔊 Audio" : "🔇 Muted";
+    }
+  }
+
+  // Home Hero Stats Rendering
+  function renderHomeStats() {
+    const rankInfo = getRankInfo(state.xp);
+    const totalQuests = window.DSA_QUEST_DATA.questMap.length;
+    const doneQuests = state.completedQuests.length;
+    const totalBadges = window.DSA_QUEST_DATA.achievements.length;
+    const unlockedCount = state.unlockedAchievements.length;
+
+    const elXp = document.getElementById("home-stat-xp");
+    const elRank = document.getElementById("home-stat-rank");
+    const elQuests = document.getElementById("home-stat-quests");
+    const elBadges = document.getElementById("home-stat-badges");
+
+    if (elXp) elXp.textContent = `${state.xp} XP`;
+    if (elRank) elRank.textContent = `Lv.${rankInfo.current.level} ${rankInfo.current.title}`;
+    if (elQuests) elQuests.textContent = `${doneQuests} / ${totalQuests} Sectors`;
+    if (elBadges) elBadges.textContent = `${unlockedCount} / ${totalBadges} Unlocked`;
+  }
+
+  // Render the 8-Node Quest Map
+  function renderQuestMap() {
+    const grid = document.getElementById("quest-map-grid");
+    if (!grid) return;
+
+    const quests = window.DSA_QUEST_DATA.questMap;
+    grid.innerHTML = quests
+      .map((q, index) => {
+        const isCompleted = state.completedQuests.includes(q.id);
+        const isUnlocked =
+          state.mentorUnlockAll ||
+          state.xp >= q.requiredXp ||
+          index === 0 ||
+          (index > 0 && state.completedQuests.includes(quests[index - 1].id));
+
+        const statusBadge = isCompleted
+          ? `<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">✓ MASTERED</span>`
+          : isUnlocked
+          ? `<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-400/40">⚡ UNLOCKED</span>`
+          : `<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-slate-800 text-slate-400 border border-slate-700">🔒 REQ ${q.requiredXp} XP</span>`;
+
+        const tagPills = q.tags
+          .map(
+            (t) =>
+              `<span class="px-2 py-0.5 rounded bg-slate-900/90 border border-slate-700/80 text-[11px] font-mono-code text-slate-300">${t}</span>`
+          )
+          .join("");
+
+        return `
+          <div class="cyber-card quest-node-card ${
+            isCompleted ? "completed" : isUnlocked ? "cyber-card-interactive" : "locked"
+          } p-5 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="text-xs font-mono-code font-bold tracking-widest text-cyan-400">${q.sector} · ${q.difficulty.toUpperCase()}</span>
+                ${statusBadge}
+              </div>
+              <h3 class="text-lg font-bold text-white mb-1">${q.title}</h3>
+              <p class="text-xs sm:text-sm text-slate-300 mb-3">${q.subtitle}</p>
+              <div class="flex flex-wrap gap-1.5 mb-4">
+                ${tagPills}
+              </div>
+            </div>
+            <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between gap-2">
+              <div class="text-xs font-mono-code text-violet-300">
+                Reward: <span class="font-bold text-cyan-300">+${q.xpReward} XP</span> · ${q.complexity}
+              </div>
+              ${
+                isUnlocked
+                  ? `<button type="button" onclick="window.DSAQuestApp.openQuestModal('${q.id}')"
+                       class="px-3.5 py-1.5 rounded-lg text-xs font-bold ${
+                         isCompleted
+                           ? "bg-emerald-500/20 text-emerald-300 border border-emerald-400/50 hover:bg-emerald-500/30"
+                           : "bg-cyan-500 text-slate-950 hover:bg-cyan-400"
+                       } transition">
+                       ${isCompleted ? "Review Sector" : "Enter Sector →"}
+                     </button>`
+                  : `<button type="button" onclick="window.DSAQuestApp.toggleMentorUnlock()"
+                       class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700 transition">
+                       Unlock via Mentor Mode
+                     </button>`
+              }
+            </div>
+          </div>
+        `;
+      })
+      .join("");
+
+    const mentorBtn = document.getElementById("mentor-unlock-btn");
+    if (mentorBtn) {
+      mentorBtn.textContent = state.mentorUnlockAll
+        ? "🔓 Mentor Mode: All Sectors Unlocked (Click to Lock by XP)"
+        : "🔑 Mentor Mode: Unlock All 8 Sectors Immediately";
+    }
+  }
+
+  function toggleMentorUnlock() {
+    state.mentorUnlockAll = !state.mentorUnlockAll;
+    saveState();
+    renderQuestMap();
+    showToast(
+      state.mentorUnlockAll ? "Mentor Mode Enabled" : "Standard Progression Restored",
+      state.mentorUnlockAll
+        ? "All 8 Quest Map sectors are now unlocked for exploration."
+        : "Sectors now unlock sequentially as you earn XP.",
+      "info"
+    );
+  }
+
+  // Open Interactive Quest Terminal Modal
+  function openQuestModal(questId) {
+    const quest = window.DSA_QUEST_DATA.questMap.find((q) => q.id === questId);
+    if (!quest) return;
+    activeQuestModalId = questId;
+    activeQuestHintIndex = 0;
+
+    const modal = document.getElementById("quest-terminal-modal");
+    const content = document.getElementById("quest-terminal-content");
+    if (!modal || !content) return;
+
+    const isCompleted = state.completedQuests.includes(quest.id);
+    const escapedCode = quest.cppExample
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+
+    const optionsHtml = quest.multipleChoiceOptions
+      .map(
+        (opt, idx) => `
+        <label class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-cyan-400/50 cursor-pointer transition">
+          <input type="radio" name="quest-mc-option" value="${opt.value}" ${
+          idx === 0 ? "checked" : ""
+        } class="accent-cyan-400 w-4 h-4" />
+          <span class="text-xs sm:text-sm text-slate-200 font-mono-code">${opt.label}</span>
+        </label>
+      `
+      )
+      .join("");
+
+    content.innerHTML = `
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+        <div>
+          <span class="text-xs font-mono-code text-cyan-400 uppercase tracking-wider">${quest.sector} // ${quest.complexity}</span>
+          <h3 class="text-xl font-bold text-white">${quest.title}</h3>
+        </div>
+        <button type="button" onclick="window.DSAQuestApp.closeQuestModal()" class="w-8 h-8 rounded-lg bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center">✕</button>
+      </div>
+
+      <div class="space-y-4">
+        <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800">
+          <div class="text-xs font-bold uppercase tracking-wider text-violet-300 mb-1">Concept Briefing</div>
+          <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">${quest.conceptSummary}</p>
+        </div>
+
+        <div>
+          <div class="text-xs font-mono-code text-slate-400 mb-1.5">C++ Reference Implementation:</div>
+          <pre class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 font-mono-code text-xs sm:text-sm text-cyan-200 overflow-x-auto">${escapedCode}</pre>
+        </div>
+
+        <div class="p-4 rounded-xl bg-slate-900/95 border border-cyan-500/30">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-cyan-300">Interactive Verification Challenge (+${quest.xpReward} XP)</span>
+            ${
+              isCompleted
+                ? `<span class="text-xs font-bold text-emerald-400">✓ Already Mastered</span>`
+                : ""
+            }
+          </div>
+          <p class="text-xs sm:text-sm text-white font-medium mb-3">${quest.challengeQuestion}</p>
+
+          <div class="space-y-2 mb-4">
+            ${optionsHtml}
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2">
+            <button type="button" onclick="window.DSAQuestApp.submitQuestAnswer()"
+              class="px-4 py-2 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs sm:text-sm transition">
+              ⚡ Verify Answer
+            </button>
+            <button type="button" onclick="window.DSAQuestApp.revealNextQuestHint()"
+              class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-400/40 font-semibold text-xs sm:text-sm transition">
+              💡 Request Hint
+            </button>
+          </div>
+
+          <div id="quest-modal-hint-box" class="hidden mt-3 p-3 rounded-lg bg-amber-500/10 border border-amber-400/40 text-xs text-amber-200"></div>
+          <div id="quest-modal-feedback" class="hidden mt-3 p-3 rounded-lg text-xs sm:text-sm"></div>
+        </div>
+      </div>
+    `;
+
+    modal.classList.remove("hidden");
+  }
+
+  function closeQuestModal() {
+    const modal = document.getElementById("quest-terminal-modal");
+    if (modal) modal.classList.add("hidden");
+    activeQuestModalId = null;
+  }
+
+  function revealNextQuestHint() {
+    const quest = window.DSA_QUEST_DATA.questMap.find((q) => q.id === activeQuestModalId);
+    const hintBox = document.getElementById("quest-modal-hint-box");
+    if (!quest || !hintBox) return;
+
+    const hintText = quest.hints[Math.min(activeQuestHintIndex, quest.hints.length - 1)];
+    activeQuestHintIndex++;
+    hintBox.classList.remove("hidden");
+    hintBox.innerHTML = `<strong>Mentor Hint ${Math.min(
+      activeQuestHintIndex,
+      quest.hints.length
+    )}:</strong> ${hintText}`;
+  }
+
+  function submitQuestAnswer() {
+    const quest = window.DSA_QUEST_DATA.questMap.find((q) => q.id === activeQuestModalId);
+    const feedback = document.getElementById("quest-modal-feedback");
+    if (!quest || !feedback) return;
+
+    const selectedRadio = document.querySelector('input[name="quest-mc-option"]:checked');
+    const chosenVal = selectedRadio ? selectedRadio.value.trim().toLowerCase() : "";
+    const isCorrect = quest.expectedAnswers.some((ans) => ans.toLowerCase() === chosenVal);
+
+    feedback.classList.remove("hidden");
+
+    if (isCorrect) {
+      playTone("success");
+      const firstTime = !state.completedQuests.includes(quest.id);
+      if (firstTime) {
+        state.completedQuests.push(quest.id);
+        addXp(quest.xpReward, `Mastered ${quest.sector}: ${quest.title}`);
+      }
+      feedback.className =
+        "mt-3 p-3.5 rounded-xl bg-emerald-500/15 border border-emerald-400 text-xs sm:text-sm text-emerald-200";
+      feedback.innerHTML = `
+        <div class="font-bold text-emerald-300 mb-1">✓ Correct! Sector Verified ${
+          firstTime ? `(+${quest.xpReward} XP)` : "(Completed)"
+        }</div>
+        <p>${quest.solutionExplanation}</p>
+      `;
+      renderAll();
+    } else {
+      playTone("error");
+      feedback.className =
+        "mt-3 p-3.5 rounded-xl bg-rose-500/15 border border-rose-400 text-xs sm:text-sm text-rose-200";
+      feedback.innerHTML = `
+        <div class="font-bold text-rose-300 mb-1">✗ Not quite right!</div>
+        <p>Check the C++ snippet carefully or click <strong>Request Hint</strong> for a step-by-step clue.</p>
+      `;
+    }
+  }
+
+  // Daily Coding Micro-Quests View + Challenge of the Day
+  function filterDailyCategory(cat) {
+    state.selectedDailyCategory = cat;
+    saveState();
+    renderDailyView();
+  }
+
+  function submitDailyMicroQuest(dqId) {
+    const dq = window.DSA_QUEST_DATA.dailyQuests.find((item) => item.id === dqId);
+    const selectEl = document.getElementById(`dq-select-${dqId}`);
+    const feedbackEl = document.getElementById(`dq-feedback-${dqId}`);
+    if (!dq || !selectEl || !feedbackEl) return;
+
+    const userVal = selectEl.value;
+    feedbackEl.classList.remove("hidden");
+
+    if (userVal === dq.answer) {
+      playTone("success");
+      const firstTime = !state.completedDailyQuests.includes(dqId);
+      if (firstTime) {
+        state.completedDailyQuests.push(dqId);
+        addXp(dq.xp, `Solved Daily Quest: ${dq.title}`);
+      }
+      const liveFeedbackEl = document.getElementById(`dq-feedback-${dqId}`);
+      if (liveFeedbackEl) {
+        liveFeedbackEl.classList.remove("hidden");
+        liveFeedbackEl.className =
+          "mt-2.5 p-2.5 rounded-lg bg-emerald-500/15 border border-emerald-400/60 text-xs text-emerald-200";
+        liveFeedbackEl.innerHTML = `<strong>✓ Correct!</strong> ${dq.explanation}`;
+      }
+    } else {
+      playTone("error");
+      feedbackEl.className =
+        "mt-2.5 p-2.5 rounded-lg bg-rose-500/15 border border-rose-400/60 text-xs text-rose-200";
+      feedbackEl.innerHTML = `<strong>✗ Try again:</strong> ${dq.hint}`;
+    }
+  }
+
+  function showDailyMicroHint(dqId) {
+    const dq = window.DSA_QUEST_DATA.dailyQuests.find((item) => item.id === dqId);
+    const feedbackEl = document.getElementById(`dq-feedback-${dqId}`);
+    if (!dq || !feedbackEl) return;
+    feedbackEl.classList.remove("hidden");
+    feedbackEl.className =
+      "mt-2.5 p-2.5 rounded-lg bg-amber-500/15 border border-amber-400/50 text-xs text-amber-200";
+    feedbackEl.innerHTML = `<strong>💡 Hint:</strong> ${dq.hint}`;
+  }
+
+  // Challenge of the Day Mode Switcher
+  function switchBossChallenge(modeKey) {
+    state.activeBossKey = modeKey;
+    activeBossHintCount = 0;
+    saveState();
+    renderDailyView();
+  }
+
+  function revealBossHint() {
+    const boss = window.DSA_QUEST_DATA.dailyBossChallenges[state.activeBossKey];
+    const container = document.getElementById("boss-hints-list");
+    if (!boss || !container) return;
+
+    if (activeBossHintCount < boss.hints.length) {
+      activeBossHintCount++;
+    }
+    container.classList.remove("hidden");
+    container.innerHTML = boss.hints
+      .slice(0, activeBossHintCount)
+      .map(
+        (h) =>
+          `<div class="p-2.5 rounded-lg bg-amber-500/10 border border-amber-400/40 text-xs text-amber-200">${h}</div>`
+      )
+      .join("");
+  }
+
+  function runBossTestSuite() {
+    const boss = window.DSA_QUEST_DATA.dailyBossChallenges[state.activeBossKey];
+    const selectedOpt = document.querySelector('input[name="boss-logic-quiz"]:checked');
+    const resultsBox = document.getElementById("boss-test-results");
+    if (!boss || !resultsBox) return;
+
+    const isLogicCorrect = selectedOpt && selectedOpt.value === "correct";
+    resultsBox.classList.remove("hidden");
+
+    if (!isLogicCorrect) {
+      playTone("error");
+      resultsBox.innerHTML = `
+        <div class="p-4 rounded-xl bg-rose-500/15 border border-rose-400 text-xs sm:text-sm text-rose-200">
+          <div class="font-bold text-rose-300 mb-1">⚠️ Logic Verification Failed on Edge Cases</div>
+          <p>Your selected branch condition did not pass the invariant check. Review the C++ template or click <strong>Unlock Progressive Hint</strong> above, then re-run the test suite!</p>
+        </div>
+      `;
+      return;
+    }
+
+    playTone("success");
+    const firstTime = !state.completedBossIds.includes(boss.id);
+    if (firstTime) {
+      state.completedBossIds.push(boss.id);
+      addXp(boss.xpReward, `Cleared Challenge of the Day: ${boss.title}`);
+      unlockAchievement("ach-boss-clear");
+    }
+
+    const liveResultsBox = document.getElementById("boss-test-results");
+    if (liveResultsBox) liveResultsBox.classList.remove("hidden");
+
+    const casesHtml = boss.testCases
+      .map(
+        (tc) => `
+        <div class="p-2.5 rounded-lg bg-slate-950/90 border border-emerald-500/40 flex flex-col gap-1">
+          <div class="flex items-center justify-between text-xs font-mono-code">
+            <span class="text-slate-300">Test #${tc.id}: ${tc.inputLabel}</span>
+            <span class="text-emerald-400 font-bold">✓ PASS (Output: ${tc.expected})</span>
+          </div>
+          <div class="text-[11px] text-slate-400">${tc.traceNote}</div>
+        </div>
+      `
+      )
+      .join("");
+
+    if (liveResultsBox) liveResultsBox.innerHTML = `
+      <div class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-400/60 space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-sm font-bold text-emerald-300">🎉 All ${boss.testCases.length}/${boss.testCases.length} Test Cases Passed!</span>
+          <span class="text-xs font-mono-code text-cyan-300">${boss.timeComplexity} Time · ${boss.spaceComplexity} Space</span>
+        </div>
+        <div class="space-y-2">${casesHtml}</div>
+        <div class="p-3 rounded-lg bg-slate-900/90 border border-slate-700 text-xs text-slate-200">
+          <strong class="text-cyan-300">Why this Solution Works:</strong> ${boss.solutionWalkthrough}
+        </div>
+      </div>
+    `;
+  }
+
+  function renderDailyView() {
+    // 1. Render Challenge of the Day Boss Panel
+    const boss = window.DSA_QUEST_DATA.dailyBossChallenges[state.activeBossKey];
+    const bossContainer = document.getElementById("cotd-boss-container");
+    if (boss && bossContainer) {
+      const isBossDone = state.completedBossIds.includes(boss.id);
+      const escapedTemplate = boss.cppStarterTemplate
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+
+      const quizHtml = boss.quizOptions
+        .map(
+          (opt, idx) => `
+          <label class="flex items-center gap-2.5 p-2.5 rounded-lg bg-slate-950/80 border border-slate-800 hover:border-cyan-400/50 cursor-pointer text-xs sm:text-sm text-slate-200 font-mono-code">
+            <input type="radio" name="boss-logic-quiz" value="${opt.id}" ${
+            idx === 0 ? "checked" : ""
+          } class="accent-cyan-400" />
+            <span>${opt.text}</span>
+          </label>
+        `
+        )
+        .join("");
+
+      bossContainer.innerHTML = `
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-4 pb-3 border-b border-slate-800">
+          <div>
+            <div class="text-xs font-mono-code font-bold text-amber-400">${boss.badge}</div>
+            <h3 class="text-lg sm:text-xl font-extrabold text-white mt-0.5">${boss.title}</h3>
+          </div>
+          <div class="flex items-center gap-2">
+            <button type="button" onclick="window.DSAQuestApp.switchBossChallenge('rotated')"
+              class="px-3 py-1.5 rounded-lg text-xs font-semibold ${
+                state.activeBossKey === "rotated"
+                  ? "bg-amber-400 text-slate-950 font-bold"
+                  : "bg-slate-800 text-slate-300"
+              } transition">
+              Boss: Rotated Binary Search
+            </button>
+            <button type="button" onclick="window.DSAQuestApp.switchBossChallenge('warmup')"
+              class="px-3 py-1.5 rounded-lg text-xs font-semibold ${
+                state.activeBossKey === "warmup"
+                  ? "bg-cyan-400 text-slate-950 font-bold"
+                  : "bg-slate-800 text-slate-300"
+              } transition">
+              Warmup: O(n) Second Largest
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <div class="space-y-3">
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">${boss.story}</p>
+            <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800">
+              <div class="text-xs font-bold uppercase text-cyan-300 mb-1">Problem Specification</div>
+              <p class="text-xs sm:text-sm text-white">${boss.problemStatement}</p>
+              <div class="mt-2 flex flex-wrap gap-2 text-[11px] font-mono-code text-slate-400">
+                <span>Reward: <strong class="text-amber-300">+${boss.xpReward} XP</strong></span>
+                <span>•</span>
+                <span>Target Time: <strong class="text-cyan-300">${boss.timeComplexity}</strong></span>
+                <span>•</span>
+                <span>Target Space: <strong class="text-violet-300">${boss.spaceComplexity}</strong></span>
+                ${
+                  isBossDone
+                    ? `<span class="text-emerald-400 font-bold">• ✓ COMPLETED</span>`
+                    : ""
+                }
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-slate-900/90 border border-cyan-500/30 space-y-2.5">
+              <div class="text-xs font-bold uppercase text-cyan-300">Step 1: Verify Key Algorithm Condition</div>
+              <p class="text-xs text-slate-200">${boss.quizQuestion}</p>
+              <div class="space-y-1.5">${quizHtml}</div>
+              <div class="flex flex-wrap gap-2 pt-2">
+                <button type="button" onclick="window.DSAQuestApp.runBossTestSuite()"
+                  class="px-4 py-2 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold text-xs sm:text-sm transition">
+                  ▶ Run C++ Test Suite (${boss.testCases.length} Cases)
+                </button>
+                <button type="button" onclick="window.DSAQuestApp.revealBossHint()"
+                  class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-400/40 text-xs font-semibold transition">
+                  💡 Unlock Progressive Hint (${ boss.hints.length } Available)
+                </button>
+              </div>
+            </div>
+
+            <div id="boss-hints-list" class="hidden space-y-2"></div>
+          </div>
+
+          <div class="space-y-3">
+            <div class="text-xs font-mono-code text-slate-400">C++ Solution Blueprint:</div>
+            <pre class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 font-mono-code text-xs text-cyan-200 overflow-x-auto leading-relaxed">${escapedTemplate}</pre>
+            <div id="boss-test-results" class="hidden"></div>
+          </div>
+        </div>
+      `;
+    }
+
+    // 2. Render Filterable Daily Micro-Quests Grid
+    const categories = ["All", "C++ Basics", "Arrays & Strings", "Searching & Sorting", "Pointers & DSA"];
+    const catBar = document.getElementById("daily-category-bar");
+    if (catBar) {
+      catBar.innerHTML = categories
+        .map(
+          (cat) => `
+          <button type="button" onclick="window.DSAQuestApp.filterDailyCategory('${cat}')"
+            class="px-3 py-1.5 rounded-xl text-xs font-semibold ${
+              state.selectedDailyCategory === cat
+                ? "bg-cyan-500/20 text-cyan-300 border border-cyan-400"
+                : "bg-slate-900/80 text-slate-400 border border-slate-800 hover:text-white"
+            } transition">
+            ${cat}
+          </button>
+        `
+        )
+        .join("");
+    }
+
+    const dqGrid = document.getElementById("daily-quests-grid");
+    if (dqGrid) {
+      const filtered = window.DSA_QUEST_DATA.dailyQuests.filter(
+        (item) =>
+          state.selectedDailyCategory === "All" || item.category === state.selectedDailyCategory
+      );
+
+      dqGrid.innerHTML = filtered
+        .map((dq) => {
+          const isSolved = state.completedDailyQuests.includes(dq.id);
+          const escapedSnippet = dq.codeSnippet
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;");
+
+          const optsHtml = dq.options
+            .map((opt) => `<option value="${opt.replace(/"/g, "&quot;")}">${opt}</option>`)
+            .join("");
+
+          return `
+            <div class="cyber-card p-4 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-2">
+                  <span class="px-2 py-0.5 rounded bg-violet-500/20 text-violet-300 text-[11px] font-mono-code">${dq.category}</span>
+                  <span class="text-xs font-mono-code font-bold ${
+                    isSolved ? "text-emerald-400" : "text-cyan-300"
+                  }">
+                    ${isSolved ? "✓ SOLVED" : `+${dq.xp} XP`}
+                  </span>
+                </div>
+                <h4 class="text-base font-bold text-white mb-1">${dq.title}</h4>
+                <p class="text-xs text-slate-300 mb-2.5">${dq.prompt}</p>
+                <pre class="p-2.5 rounded-lg bg-slate-950 border border-slate-800/90 font-mono-code text-xs text-cyan-200 overflow-x-auto mb-3">${escapedSnippet}</pre>
+              </div>
+
+              <div>
+                <div class="flex flex-col sm:flex-row gap-2">
+                  <select id="dq-select-${dq.id}" aria-label="Select answer for ${dq.title}"
+                    class="flex-1 px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white font-mono-code focus:border-cyan-400 outline-none">
+                    ${optsHtml}
+                  </select>
+                  <button type="button" onclick="window.DSAQuestApp.submitDailyMicroQuest('${dq.id}')"
+                    class="px-3.5 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition shrink-0">
+                    Check
+                  </button>
+                  <button type="button" onclick="window.DSAQuestApp.showDailyMicroHint('${dq.id}')"
+                    class="px-2.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 text-xs transition shrink-0" title="Hint">
+                    💡
+                  </button>
+                </div>
+                <div id="dq-feedback-${dq.id}" class="hidden"></div>
+              </div>
+            </div>
+          `;
+        })
+        .join("");
+    }
+  }
+
+  // Render Community Leaderboard (Clearly identifying Demo Data)
+  function renderLeaderboardView() {
+    const tbody = document.getElementById("leaderboard-tbody");
+    if (!tbody) return;
+
+    const myRank = getRankInfo(state.xp).current.title;
+    const combined = [
+      ...window.DSA_QUEST_DATA.demoLeaderboard,
+      {
+        id: "player-you",
+        name: `${state.adventurerName} (You — Local Save)`,
+        rankTitle: myRank,
+        xp: state.xp,
+        streak: state.streakDays,
+        questsDone: state.completedQuests.length,
+        favoriteTopic: "Active Explorer",
+        isDemo: false
+      }
+    ].sort((a, b) => b.xp - a.xp);
+
+    tbody.innerHTML = combined
+      .map((entry, idx) => {
+        const pos = idx + 1;
+        const medal = pos === 1 ? "🥇" : pos === 2 ? "🥈" : pos === 3 ? "🥉" : `#${pos}`;
+        const rowClass = entry.isDemo
+          ? "border-b border-slate-800/80 text-slate-300"
+          : "border-b border-cyan-400/50 bg-cyan-500/10 text-white font-semibold";
+
+        return `
+          <tr class="${rowClass}">
+            <td class="py-3 px-4 font-mono-code text-xs sm:text-sm">${medal}</td>
+            <td class="py-3 px-4 text-xs sm:text-sm">
+              <div class="flex items-center gap-2">
+                <span>${entry.name}</span>
+                ${
+                  entry.isDemo
+                    ? `<span class="px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 text-[10px] font-mono-code">DEMO DATA</span>`
+                    : `<span class="px-1.5 py-0.5 rounded bg-cyan-400 text-slate-950 text-[10px] font-extrabold">YOU</span>`
+                }
+              </div>
+            </td>
+            <td class="py-3 px-4 text-xs text-violet-300 font-mono-code">${entry.rankTitle}</td>
+            <td class="py-3 px-4 text-xs text-center font-mono-code">${entry.questsDone} / 8</td>
+            <td class="py-3 px-4 text-xs text-center font-mono-code text-amber-300">🔥 ${entry.streak}d</td>
+            <td class="py-3 px-4 text-right font-mono-code text-xs sm:text-sm text-cyan-300 font-bold">${entry.xp} XP</td>
+          </tr>
+        `;
+      })
+      .join("");
+  }
+
+  // Render Progress Dashboard & Shareable Results
+  function renderDashboardView() {
+    const rankInfo = getRankInfo(state.xp);
+    const nameInput = document.getElementById("dash-adventurer-name");
+    if (nameInput && document.activeElement !== nameInput) {
+      nameInput.value = state.adventurerName;
+    }
+
+    const summaryEl = document.getElementById("dash-summary-cards");
+    if (summaryEl) {
+      summaryEl.innerHTML = `
+        <div class="cyber-card p-4">
+          <div class="text-xs text-slate-400 uppercase">Current Rank</div>
+          <div class="text-lg font-extrabold text-cyan-300 mt-1">Lv.${rankInfo.current.level} ${rankInfo.current.title}</div>
+          <div class="text-xs text-slate-400 mt-1">${
+            rankInfo.next ? `${rankInfo.xpNeededForNext} XP to ${rankInfo.next.title}` : "Max Academy Rank Achieved!"
+          }</div>
+        </div>
+        <div class="cyber-card p-4">
+          <div class="text-xs text-slate-400 uppercase">Total Experience</div>
+          <div class="text-2xl font-extrabold font-mono-code text-white mt-1">${state.xp} XP</div>
+          <div class="text-xs text-emerald-400 mt-1">Saved in Browser LocalStorage</div>
+        </div>
+        <div class="cyber-card p-4">
+          <div class="text-xs text-slate-400 uppercase">Quest Sectors Mastered</div>
+          <div class="text-2xl font-extrabold font-mono-code text-violet-300 mt-1">${state.completedQuests.length} / 8</div>
+          <div class="text-xs text-slate-400 mt-1">Daily Micro-Quests: ${state.completedDailyQuests.length} / 8</div>
+        </div>
+        <div class="cyber-card p-4">
+          <div class="text-xs text-slate-400 uppercase">Active Streak</div>
+          <div class="text-2xl font-extrabold font-mono-code text-amber-300 mt-1">🔥 ${state.streakDays} Days</div>
+          <div class="text-xs text-slate-400 mt-1">Daily Bosses Cleared: ${state.completedBossIds.length}</div>
+        </div>
+      `;
+    }
+
+    const achGrid = document.getElementById("dash-achievements-grid");
+    if (achGrid) {
+      achGrid.innerHTML = window.DSA_QUEST_DATA.achievements
+        .map((ach) => {
+          const unlocked = state.unlockedAchievements.includes(ach.id);
+          return `
+            <div class="cyber-card p-4 border ${
+              unlocked
+                ? "border-amber-400/60 bg-amber-500/5"
+                : "border-slate-800 opacity-55"
+            } flex items-start gap-3">
+              <div class="text-2xl p-2 rounded-xl bg-slate-900 border border-slate-800">${ach.icon}</div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h4 class="text-sm font-bold text-white">${ach.title}</h4>
+                  <span class="text-[10px] font-mono-code px-1.5 py-0.5 rounded ${
+                    unlocked
+                      ? "bg-emerald-500/20 text-emerald-300"
+                      : "bg-slate-800 text-slate-400"
+                  }">${unlocked ? "UNLOCKED" : `+${ach.xpBonus} XP`}</span>
+                </div>
+                <p class="text-xs text-slate-300 mt-1">${ach.description}</p>
+              </div>
+            </div>
+          `;
+        })
+        .join("");
+    }
+
+    renderSharePreviewText();
+  }
+
+  function updateAdventurerName(newName) {
+    const cleaned = (newName || "").trim().slice(0, 24);
+    state.adventurerName = cleaned || "CyberCadet";
+    saveState();
+    renderLeaderboardView();
+    renderSharePreviewText();
+    showToast("Callsign Updated", `Adventurer profile set to ${state.adventurerName}.`, "info");
+  }
+
+  function getFormattedShareText() {
+    const rankInfo = getRankInfo(state.xp);
+    const mapBlocks = window.DSA_QUEST_DATA.questMap
+      .map((q) => (state.completedQuests.includes(q.id) ? "🟦" : "⬛"))
+      .join("");
+    return [
+      `⚡ DSA QUEST // C++ & Algorithms Academy`,
+      `Adventurer: ${state.adventurerName} | Rank: Lv.${rankInfo.current.level} ${rankInfo.current.title}`,
+      `Total XP: ${state.xp} XP | Streak: 🔥 ${state.streakDays} Days`,
+      `Quest Map [${state.completedQuests.length}/8]: ${mapBlocks}`,
+      `Badges Unlocked: ${state.unlockedAchievements.length}/${window.DSA_QUEST_DATA.achievements.length} 🏆`
+    ].join("\n");
+  }
+
+  function renderSharePreviewText() {
+    const previewEl = document.getElementById("share-card-text-preview");
+    if (previewEl) {
+      previewEl.textContent = getFormattedShareText();
+    }
+  }
+
+  function copyShareableResult() {
+    const text = getFormattedShareText();
+    const copyFallback = () => {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand("copy");
+        showToast("📋 Copied to Clipboard!", "Share your DSA QUEST progress card with your community!", "xp");
+      } catch (e) {
+        showToast("Copy Ready", "Select the share text box to copy manually.", "info");
+      }
+      document.body.removeChild(ta);
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(
+        () => {
+          playTone("success");
+          showToast("📋 Copied to Clipboard!", "Share your DSA QUEST progress card with friends!", "xp");
+        },
+        () => copyFallback()
+      );
+    } else {
+      copyFallback();
+    }
+  }
+
+  // Simulate XP Boost or Reset Progress (using in-page modal, never confirm())
+  function simulateXpBoost() {
+    playTone("success");
+    addXp(200, "Sandbox Mentor XP Boost (+200 XP)");
+  }
+
+  function openResetModal() {
+    const modal = document.getElementById("reset-confirm-modal");
+    if (modal) modal.classList.remove("hidden");
+  }
+
+  function closeResetModal() {
+    const modal = document.getElementById("reset-confirm-modal");
+    if (modal) modal.classList.add("hidden");
+  }
+
+  function confirmResetProgress() {
+    state = { ...defaultState };
+    saveState();
+    closeResetModal();
+    renderAll();
+    showToast("Progress Reset", "Your local academy profile has been reset to 120 XP.", "info");
+  }
+
+  function renderAll() {
+    renderHeaderHUD();
+    renderHomeStats();
+    renderQuestMap();
+    renderDailyView();
+    renderLeaderboardView();
+    renderDashboardView();
+  }
+
+  function init() {
+    loadState();
+    checkMilestoneAchievements();
+    renderAll();
+    if (window.DSAVisualizer) {
+      window.DSAVisualizer.init();
+    }
+  }
+
+  return {
+    init,
+    switchTab,
+    toggleSound,
+    toggleMentorUnlock,
+    openQuestModal,
+    closeQuestModal,
+    revealNextQuestHint,
+    submitQuestAnswer,
+    filterDailyCategory,
+    submitDailyMicroQuest,
+    showDailyMicroHint,
+    switchBossChallenge,
+    revealBossHint,
+    runBossTestSuite,
+    updateAdventurerName,
+    copyShareableResult,
+    simulateXpBoost,
+    openResetModal,
+    closeResetModal,
+    confirmResetProgress,
+    unlockAchievement,
+    playTone
+  };
+})();
+
+window.addEventListener("DOMContentLoaded", () => {
+  window.DSAQuestApp.init();
+});
+
+</script>
+</body>
+</html>
